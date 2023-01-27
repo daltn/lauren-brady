@@ -1,6 +1,5 @@
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import ImageBox from 'components/shared/ImageBox'
-import { TimelineSection } from 'components/shared/TimelineSection'
 import { Image, PortableTextBlock } from 'sanity'
 
 export function CustomPortableText({
@@ -49,10 +48,6 @@ export function CustomPortableText({
             )}
           </div>
         )
-      },
-      timeline: ({ value }) => {
-        const { items } = value || {}
-        return <TimelineSection timelines={items} />
       },
     },
   }

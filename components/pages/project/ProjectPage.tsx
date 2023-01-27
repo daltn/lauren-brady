@@ -96,7 +96,7 @@ export function ProjectPage({
                   <div className="text-md flex flex-row flex-wrap md:text-lg">
                     {tags?.map((tag, key) => (
                       <div key={key} className="mr-1 break-words ">
-                        #{tag}
+                        {tag}
                       </div>
                     ))}
                   </div>
