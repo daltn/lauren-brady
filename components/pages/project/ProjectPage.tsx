@@ -29,6 +29,7 @@ export function ProjectPage({
     duration,
     overview,
     role,
+    starring,
     tags,
     title,
   } = project || {}
@@ -73,7 +74,6 @@ export function ProjectPage({
                   </div>
                 )}
 
-                {/* Site */}
                 {role && (
                   <div className="p-3 lg:p-4">
                     <div className="text-xs md:text-sm">Role</div>
@@ -83,9 +83,20 @@ export function ProjectPage({
                   </div>
                 )}
 
+                {starring && (
+                  <div className="p-3 lg:p-4">
+                    <div className="text-xs md:text-sm">Starring</div>
+                    {starring && (
+                      <p className="text-md break-words md:text-lg">
+                        {starring}
+                      </p>
+                    )}
+                  </div>
+                )}
+
                 {/* Tags */}
                 <div className="p-3 lg:p-4">
-                  <div className="text-xs md:text-sm">Tags</div>
+                  <div className="text-xs md:text-sm">Type</div>
                   <div className="text-md flex flex-row flex-wrap md:text-lg">
                     {tags?.map((tag, key) => (
                       <div key={key} className="mr-1 break-words ">

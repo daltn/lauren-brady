@@ -42,6 +42,7 @@ export const projectBySlugQuery = groq`
     overview,
     role,
     "slug": slug.current,
+    starring,
     tags,
     title,
   }

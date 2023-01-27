@@ -54,6 +54,7 @@ export interface ProjectPayload {
   }
   overview?: PortableTextBlock[]
   role?: string
+  starring?: string
   slug: string
   tags?: string[]
   title?: string

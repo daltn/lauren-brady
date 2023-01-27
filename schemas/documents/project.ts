@@ -78,6 +78,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'starring',
+      title: 'Starring',
+      type: 'string',
+    }),
+    defineField({
       name: 'tags',
       title: 'Type',
       type: 'array',
