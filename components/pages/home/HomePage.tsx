@@ -25,8 +25,6 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
     body,
   } = page ?? {}
 
-  console.log({ body })
-
   return (
     <>
       <Head>
