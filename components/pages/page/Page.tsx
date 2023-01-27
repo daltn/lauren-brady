@@ -1,5 +1,6 @@
 import { CustomPortableText } from 'components/shared/CustomPortableText'
 import { Header } from 'components/shared/Header'
+import ImageBox from 'components/shared/ImageBox'
 import Layout from 'components/shared/Layout'
 import ScrollUp from 'components/shared/ScrollUp'
 import Head from 'next/head'
@@ -16,7 +17,7 @@ export interface PageProps {
 
 export function Page({ page, settings, homePageTitle, preview }: PageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { body, overview, title } = page || {}
+  const { body, overview, title, pageImage } = page || {}
 
   return (
     <>
@@ -27,16 +28,24 @@ export function Page({ page, settings, homePageTitle, preview }: PageProps) {
       <Layout settings={settings} preview={preview}>
         <div>
           <div className="mb-14">
-            {/* Header */}
             <Header title={title} description={overview} />
-
-            {/* Body */}
-            {body && (
-              <CustomPortableText
-                paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
-                value={body}
-              />
-            )}
+            <div className="flex flex-col lg:flex-row">
+              {pageImage && (
+                <ImageBox
+                  image={pageImage}
+                  alt={`Image for ${title}`}
+                  classesWrapper="relative aspect-[16/9]"
+                />
+              )}
+              <div>
+                {body && (
+                  <CustomPortableText
+                    paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+                    value={body}
+                  />
+                )}
+              </div>
+            </div>
 
             {/* Workaround: scroll to top on route change */}
             <ScrollUp />

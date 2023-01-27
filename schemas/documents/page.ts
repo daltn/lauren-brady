@@ -52,6 +52,15 @@ export default defineType({
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
+      name: 'pageImage',
+      title: 'Page Image',
+      description: 'This image will appear on the left column',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       type: 'array',
       name: 'body',
       title: 'Body',

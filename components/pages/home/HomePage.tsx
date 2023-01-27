@@ -51,7 +51,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
                 }
                 return (
                   <Link key={key} href={href}>
-                    <ProjectListItem project={project} odd={key % 2} />
+                    <ProjectListItem project={project} />
                   </Link>
                 )
               })}

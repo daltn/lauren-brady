@@ -40,6 +40,7 @@ export interface PagePayload {
   body?: PortableTextBlock[]
   name?: string
   overview?: PortableTextBlock[]
+  pageImage?: Image
   title?: string
   slug?: string
 }

@@ -27,6 +27,7 @@ export const pagesBySlugQuery = groq`
     _id,
     body,
     overview,
+    pageImage,
     title,
     "slug": slug.current,
   }
