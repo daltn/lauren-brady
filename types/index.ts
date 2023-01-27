@@ -33,6 +33,7 @@ export interface HomePagePayload {
   overview?: PortableTextBlock[]
   showcaseProjects?: ShowcaseProject[]
   title?: string
+  body?: PortableTextBlock[]
 }
 
 export interface PagePayload {
@@ -52,7 +53,7 @@ export interface ProjectPayload {
     end?: string
   }
   overview?: PortableTextBlock[]
-  site?: string
+  role?: string
   slug: string
   tags?: string[]
   title?: string

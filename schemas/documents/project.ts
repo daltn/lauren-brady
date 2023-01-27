@@ -73,9 +73,9 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'site',
-      title: 'Site',
-      type: 'url',
+      name: 'role',
+      title: 'Role',
+      type: 'string',
     }),
     defineField({
       name: 'tags',
@@ -112,6 +112,10 @@ export default defineType({
           styles: [],
         }),
         // Custom blocks
+        defineArrayMember({
+          name: 'youtube',
+          type: 'youtube',
+        }),
         defineField({
           type: 'image',
           icon: ImageIcon,

@@ -1,4 +1,5 @@
 import { ProjectListItem } from 'components/pages/home/ProjectListItem'
+import { CustomPortableText } from 'components/shared/CustomPortableText'
 import { Header } from 'components/shared/Header'
 import Layout from 'components/shared/Layout'
 import ScrollUp from 'components/shared/ScrollUp'
@@ -17,7 +18,14 @@ export interface HomePageProps {
 }
 
 export function HomePage({ page, settings, preview }: HomePageProps) {
-  const { overview, showcaseProjects, title = 'Personal website' } = page ?? {}
+  const {
+    overview,
+    showcaseProjects,
+    title = 'Lauren Brady',
+    body,
+  } = page ?? {}
+
+  console.log({ body })
 
   return (
     <>
@@ -29,6 +37,12 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         <div className="space-y-20">
           {/* Header */}
           {title && <Header centered title={title} description={overview} />}
+          {body && (
+            <CustomPortableText
+              paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+              value={body}
+            />
+          )}
           {/* Showcase projects */}
           {showcaseProjects && showcaseProjects.length > 0 && (
             <div className="mx-auto max-w-[100rem] rounded-md border">

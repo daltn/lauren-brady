@@ -79,6 +79,10 @@ export default defineType({
           styles: [],
         }),
         // Custom blocks
+        defineArrayMember({
+          name: 'youtube',
+          type: 'youtube',
+        }),
         defineField({
           type: 'image',
           icon: ImageIcon,

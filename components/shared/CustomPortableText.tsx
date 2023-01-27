@@ -1,5 +1,9 @@
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
+
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import ImageBox from 'components/shared/ImageBox'
+import getYouTubeId from 'get-youtube-id'
+import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 import { Image, PortableTextBlock } from 'sanity'
 
 export function CustomPortableText({
@@ -48,6 +52,11 @@ export function CustomPortableText({
             )}
           </div>
         )
+      },
+      youtube: ({ value }) => {
+        const { url, title } = value
+        const id = getYouTubeId(url)
+        return <LiteYouTubeEmbed id={id} title={title} />
       },
     },
   }

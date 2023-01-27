@@ -3,7 +3,6 @@ import { Header } from 'components/shared/Header'
 import ImageBox from 'components/shared/ImageBox'
 import ScrollUp from 'components/shared/ScrollUp'
 import Head from 'next/head'
-import Link from 'next/link'
 import type { ProjectPayload, SettingsPayload } from 'types'
 
 import Layout from '../../shared/Layout'
@@ -29,7 +28,7 @@ export function ProjectPage({
     description,
     duration,
     overview,
-    site,
+    role,
     tags,
     title,
   } = project || {}
@@ -75,17 +74,11 @@ export function ProjectPage({
                 )}
 
                 {/* Site */}
-                {site && (
+                {role && (
                   <div className="p-3 lg:p-4">
-                    <div className="text-xs md:text-sm">Site</div>
-                    {site && (
-                      <Link
-                        target="_blank"
-                        className="text-md break-words md:text-lg"
-                        href={site}
-                      >
-                        {site}
-                      </Link>
+                    <div className="text-xs md:text-sm">Role</div>
+                    {role && (
+                      <p className="text-md break-words md:text-lg">{role}</p>
                     )}
                   </div>
                 )}

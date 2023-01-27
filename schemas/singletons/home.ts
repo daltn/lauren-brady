@@ -1,4 +1,4 @@
-import { HomeIcon } from '@sanity/icons'
+import { HomeIcon, ImageIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -57,6 +57,69 @@ export default defineType({
         }),
       ],
       validation: (rule) => rule.max(155).required(),
+    }),
+    defineField({
+      type: 'array',
+      name: 'body',
+      title: 'Body',
+      description: "This is where you can write the page's content.",
+      of: [
+        // Paragraphs
+        defineArrayMember({
+          type: 'block',
+          marks: {
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'Url',
+                  },
+                ],
+              },
+            ],
+          },
+          styles: [],
+        }),
+        // Custom blocks
+        defineArrayMember({
+          name: 'youtube',
+          type: 'youtube',
+        }),
+        defineField({
+          type: 'image',
+          icon: ImageIcon,
+          name: 'image',
+          title: 'Image',
+          options: {
+            hotspot: true,
+          },
+          preview: {
+            select: {
+              imageUrl: 'asset.url',
+              title: 'caption',
+            },
+          },
+          fields: [
+            defineField({
+              title: 'Caption',
+              name: 'caption',
+              type: 'string',
+            }),
+            defineField({
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              description:
+                'Alternative text for screenreaders. Falls back on caption if not set',
+            }),
+          ],
+        }),
+      ],
     }),
     defineField({
       name: 'showcaseProjects',
