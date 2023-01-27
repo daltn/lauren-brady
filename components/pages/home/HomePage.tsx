@@ -43,7 +43,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
           )}
           {/* Showcase projects */}
           {showcaseProjects && showcaseProjects.length > 0 && (
-            <div className="mx-auto max-w-[100rem] rounded-md border">
+            <div className="mx-auto grid max-w-[100rem] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {showcaseProjects.map((project, key) => {
                 const href = resolveHref(project._type, project.slug)
                 if (!href) {
