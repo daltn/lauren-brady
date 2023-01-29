@@ -21,7 +21,7 @@ export function Navbar({ menuItems }: NavbarProps) {
               className={`text-lg hover:text-black md:text-xl ${
                 menuItem?._type === 'home'
                   ? 'font-extrabold text-black'
-                  : 'text-gray-600'
+                  : 'text-gray-700'
               }`}
               href={href}
             >

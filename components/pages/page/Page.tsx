@@ -18,7 +18,6 @@ export interface PageProps {
 export function Page({ page, settings, homePageTitle, preview }: PageProps) {
   // Default to an empty object to allow previews on non-existent documents
   const { body, overview, title, pageImage } = page || {}
-
   return (
     <>
       <Head>
@@ -34,13 +33,15 @@ export function Page({ page, settings, homePageTitle, preview }: PageProps) {
                 <ImageBox
                   image={pageImage}
                   alt={`Image for ${title}`}
-                  classesWrapper="relative aspect-[16/9]"
+                  classesWrapper="relative aspect-[8/10] self-start"
+                  height={1662}
+                  width={1330}
                 />
               )}
-              <div>
+              <div className="mt-5 lg:mt-0 lg:ml-4">
                 {body && (
                   <CustomPortableText
-                    paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+                    paragraphClasses="font-sans max-w-3xl text-gray-700 text-xl"
                     value={body}
                   />
                 )}

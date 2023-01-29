@@ -37,7 +37,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
           {title && <Header centered title={title} description={overview} />}
           {body && (
             <CustomPortableText
-              paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+              paragraphClasses="font-sans max-w-3xl text-gray-700 text-xl"
               value={body}
             />
           )}
