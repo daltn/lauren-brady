@@ -30,7 +30,7 @@ export default defineType({
     defineField({
       name: 'overview',
       description:
-        'Used both for the <meta> description tag for SEO, and project subheader.',
+        'Used only for the <meta> description info for search engine results, does not appear on page',
       title: 'Overview',
       type: 'array',
       of: [
@@ -60,7 +60,7 @@ export default defineType({
       name: 'coverImage',
       title: 'Cover Image',
       description:
-        'This image will be used as the cover image for the project. If you choose to add it to the show case projects, this is the image displayed in the list within the homepage.',
+        'This image will be used as the image for the project in the work grid',
       type: 'image',
       options: {
         hotspot: true,
@@ -73,13 +73,8 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'role',
-      title: 'Role',
-      type: 'string',
-    }),
-    defineField({
-      name: 'starring',
-      title: 'Starring',
+      name: 'artist',
+      title: 'Artist',
       type: 'string',
     }),
     defineField({
@@ -94,6 +89,63 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Project Description',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          marks: {
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'Url',
+                  },
+                ],
+              },
+            ],
+          },
+          styles: [],
+        }),
+        // Custom blocks
+        defineField({
+          type: 'image',
+          icon: ImageIcon,
+          name: 'image',
+          title: 'Image',
+          options: {
+            hotspot: true,
+          },
+          preview: {
+            select: {
+              imageUrl: 'asset.url',
+              title: 'caption',
+            },
+          },
+          fields: [
+            defineField({
+              title: 'Caption',
+              name: 'caption',
+              type: 'string',
+            }),
+            defineField({
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              description:
+                'Alternative text for screenreaders. Falls back on caption if not set',
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'video',
+      title: 'Video Embed and Stills',
       type: 'array',
       of: [
         defineArrayMember({

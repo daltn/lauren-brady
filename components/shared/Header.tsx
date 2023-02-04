@@ -14,14 +14,8 @@ export function Header(props: HeaderProps) {
     <div className={`${centered ? 'text-center' : 'w-5/6 lg:w-3/5'}`}>
       {/* Title */}
       {title && (
-        <div className="text-3xl font-extrabold tracking-normal md:text-5xl">
+        <div className="mb-4 text-4xl font-extrabold tracking-normal md:text-5xl">
           {title}
-        </div>
-      )}
-      {/* Description */}
-      {description && (
-        <div className="my-4 font-sans text-xl text-gray-700 md:max-w-md md:text-2xl">
-          <CustomPortableText value={description} />
         </div>
       )}
     </div>

@@ -41,7 +41,7 @@ export function Page({ page, settings, homePageTitle, preview }: PageProps) {
               <div className="mt-5 lg:mt-0 lg:ml-4">
                 {body && (
                   <CustomPortableText
-                    paragraphClasses="font-sans max-w-3xl text-gray-700 text-xl"
+                    paragraphClasses="font-sans max-w-3xl text-gray-700 text-md"
                     value={body}
                   />
                 )}

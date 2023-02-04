@@ -49,13 +49,13 @@ export interface ProjectPayload {
   client?: string
   coverImage?: Image
   description?: PortableTextBlock[]
+  video?: PortableTextBlock[]
   duration?: {
     start?: string
     end?: string
   }
   overview?: PortableTextBlock[]
-  role?: string
-  starring?: string
+  artist?: string
   slug: string
   tags?: string[]
   title?: string

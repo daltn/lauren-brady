@@ -22,20 +22,8 @@ export function ProjectPage({
   preview,
 }: ProjectPageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const {
-    client,
-    coverImage,
-    description,
-    duration,
-    overview,
-    role,
-    starring,
-    tags,
-    title,
-  } = project || {}
-
-  const startYear = new Date(duration?.start).getFullYear()
-  const endYear = duration?.end ? new Date(duration?.end).getFullYear() : 'Now'
+  const { client, artist, description, overview, tags, title, video } =
+    project || {}
 
   return (
     <>
@@ -45,76 +33,48 @@ export function ProjectPage({
 
       <Layout settings={settings} preview={preview}>
         <div>
-          <div className="mb-20 space-y-6">
-            {/* Header */}
+          <div className="mb-20 space-y-3">
             <Header title={title} description={overview} />
-
-            <div className="rounded-md border">
-              {/* Image  */}
-              <ImageBox
-                image={coverImage}
-                alt={`Cover image for ${title}`}
-                classesWrapper="relative aspect-[16/9]"
-              />
-
-              <div className="divide-inherit grid grid-cols-1 divide-y lg:grid-cols-4 lg:divide-y-0 lg:divide-x">
-                {/* Duration */}
-                {!!(startYear && endYear) && (
-                  <div className="p-3 lg:p-4">
-                    <div className="text-xs md:text-sm">Duration</div>
-                    <div className="text-md md:text-lg">{`${startYear} -  ${endYear}`}</div>
-                  </div>
-                )}
-
-                {/* Client */}
-                {client && (
-                  <div className="p-3 lg:p-4">
-                    <div className="text-xs md:text-sm">Client</div>
-                    <div className="text-md md:text-lg">{client}</div>
-                  </div>
-                )}
-
-                {role && (
-                  <div className="p-3 lg:p-4">
-                    <div className="text-xs md:text-sm">Role</div>
-                    {role && (
-                      <p className="text-md break-words md:text-lg">{role}</p>
-                    )}
-                  </div>
-                )}
-
-                {starring && (
-                  <div className="p-3 lg:p-4">
-                    <div className="text-xs md:text-sm">Starring</div>
-                    {starring && (
-                      <p className="text-md break-words md:text-lg">
-                        {starring}
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                {/* Tags */}
-                <div className="p-3 lg:p-4">
-                  <div className="text-xs md:text-sm">Type</div>
-                  <div className="text-md flex flex-row flex-wrap md:text-lg">
-                    {tags?.map((tag, key) => (
-                      <div key={key} className="mr-1 break-words ">
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
+            <section className="flex flex-col text-gray-700 md:flex-row">
+              <div className="w-full md:mr-6 md:w-3/5 md:pt-3">
+                <div className="text-md mb-[1px]">
+                  <strong className="text-md">Type: </strong>
+                  {tags?.map((tag, idx) => (
+                    <span key={idx} className="">
+                      {idx !== 0 && ', '}
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </div>
-            </div>
 
-            {/* Description */}
-            {description && (
-              <CustomPortableText
-                paragraphClasses="font-sans max-w-3xl text-xl text-gray-700"
-                value={description}
-              />
-            )}
+                {client && (
+                  <p className="text-md">
+                    <strong className="text-md">Client:</strong> {client}
+                  </p>
+                )}
+
+                {artist && (
+                  <p className="text-md">
+                    <strong className="text-md">Artist: </strong> {artist}
+                  </p>
+                )}
+
+                {description && (
+                  <CustomPortableText
+                    paragraphClasses="font-sans text-md text-gray-700"
+                    value={description}
+                  />
+                )}
+              </div>
+              <div className="w-full md:w-1/2">
+                {video && (
+                  <CustomPortableText
+                    paragraphClasses="font-sans text-md text-gray-700"
+                    value={video}
+                  />
+                )}
+              </div>
+            </section>
             {/* Workaround: scroll to top on route change */}
             <ScrollUp />
           </div>

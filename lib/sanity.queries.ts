@@ -37,11 +37,12 @@ export const projectBySlugQuery = groq`
   *[_type == "project" && slug.current == $slug][0] {
     _id,
     client,
+    artist,
     coverImage,
     description,
+    video,
     duration,
     overview,
-    role,
     "slug": slug.current,
     starring,
     tags,
