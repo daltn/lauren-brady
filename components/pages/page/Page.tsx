@@ -27,7 +27,6 @@ export function Page({ page, settings, homePageTitle, preview }: PageProps) {
       <Layout settings={settings} preview={preview}>
         <div>
           <div className="mb-14">
-            <Header title={title} description={overview} />
             <div className="flex flex-col lg:flex-row">
               {pageImage && (
                 <ImageBox

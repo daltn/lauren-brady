@@ -32,9 +32,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
       </Head>
 
       <Layout settings={settings} preview={preview}>
-        <div className="space-y-20">
-          {/* Header */}
-          {title && <Header centered title={title} description={overview} />}
+        <div className="space-y-10">
           {body && (
             <CustomPortableText
               paragraphClasses="font-sans max-w-3xl text-gray-700 text-xl"
