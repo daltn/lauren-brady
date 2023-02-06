@@ -10,9 +10,8 @@ export function Navbar({ menuItems }: NavbarProps) {
   const router = useRouter()
   const slug = router?.query?.slug
 
-  console.log({ router })
   return (
-    <div className="relative sticky top-0 z-10 flex flex-wrap items-center gap-x-5 bg-white/80 py-[30px] px-4 backdrop-blur  md:px-16 lg:px-32">
+    <div className="relative sticky top-0 z-10 flex flex-wrap items-center justify-items-end gap-x-5 bg-white/80 py-[30px] px-4 backdrop-blur  md:px-16 lg:px-32">
       {menuItems &&
         menuItems.map((menuItem, idx) => {
           const href = resolveHref(menuItem?._type, menuItem?.slug)
@@ -20,7 +19,7 @@ export function Navbar({ menuItems }: NavbarProps) {
             return null
           }
           return (
-            <div key={idx}>
+            <div key={idx} className={`${idx === 1 ? 'ml-auto' : ''}`}>
               <Link
                 className={`text-lg hover:text-black md:text-xl ${
                   menuItem?._type === 'home'

@@ -1,3 +1,4 @@
+import ContactForm from 'components/shared/ContactForm'
 import { CustomPortableText } from 'components/shared/CustomPortableText'
 import { Header } from 'components/shared/Header'
 import ImageBox from 'components/shared/ImageBox'
@@ -17,7 +18,8 @@ export interface PageProps {
 
 export function Page({ page, settings, homePageTitle, preview }: PageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { body, overview, title, pageImage } = page || {}
+  const { body, title, pageImage, slug } = page || {}
+
   return (
     <>
       <Head>
@@ -37,16 +39,21 @@ export function Page({ page, settings, homePageTitle, preview }: PageProps) {
                   width={1330}
                 />
               )}
-              <div className="mt-5 lg:mt-0 lg:ml-4">
-                {body && (
+
+              {body && (
+                <div className="mt-5 lg:mt-0 lg:ml-4">
                   <CustomPortableText
                     paragraphClasses="font-sans max-w-3xl text-gray-700 text-md"
                     value={body}
                   />
-                )}
-              </div>
+                </div>
+              )}
             </div>
-
+            {slug === 'contact' && (
+              <div className="mt-5 lg:mt-0 lg:ml-4">
+                <ContactForm />
+              </div>
+            )}
             {/* Workaround: scroll to top on route change */}
             <ScrollUp />
           </div>
