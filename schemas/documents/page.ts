@@ -122,6 +122,19 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'showcaseProjects',
+      title: 'Showcase projects',
+      description:
+        'These are the projects that will appear first on your landing page.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: [{ type: 'project' }],
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {

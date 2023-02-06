@@ -48,7 +48,6 @@ export default function IndexPage(props: PageProps) {
 const fallbackPage: HomePagePayload = {
   title: '',
   overview: [],
-  showcaseProjects: [],
 }
 
 export const getStaticProps: GetStaticProps<

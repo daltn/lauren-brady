@@ -1,9 +1,7 @@
-import { ProjectListItem } from 'components/pages/home/ProjectListItem'
 import { CustomPortableText } from 'components/shared/CustomPortableText'
 import { Header } from 'components/shared/Header'
 import Layout from 'components/shared/Layout'
 import ScrollUp from 'components/shared/ScrollUp'
-import { resolveHref } from 'lib/sanity.links'
 import Head from 'next/head'
 import Link from 'next/link'
 import type { HomePagePayload } from 'types'
@@ -18,12 +16,7 @@ export interface HomePageProps {
 }
 
 export function HomePage({ page, settings, preview }: HomePageProps) {
-  const {
-    overview,
-    showcaseProjects,
-    title = 'Lauren Brady',
-    body,
-  } = page ?? {}
+  const { body } = page ?? {}
 
   return (
     <>
@@ -39,23 +32,6 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
               value={body}
             />
           )}
-          {/* Showcase projects */}
-          {showcaseProjects && showcaseProjects.length > 0 && (
-            <div className="mx-auto grid max-w-[100rem] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {showcaseProjects.map((project, key) => {
-                const href = resolveHref(project._type, project.slug)
-                if (!href) {
-                  return null
-                }
-                return (
-                  <Link key={key} href={href}>
-                    <ProjectListItem project={project} />
-                  </Link>
-                )
-              })}
-            </div>
-          )}
-
           {/* Workaround: scroll to top on route change */}
           <ScrollUp />
         </div>

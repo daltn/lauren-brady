@@ -31,7 +31,6 @@ export interface ShowcaseProject {
 export interface HomePagePayload {
   footer?: PortableTextBlock[]
   overview?: PortableTextBlock[]
-  showcaseProjects?: ShowcaseProject[]
   title?: string
   body?: PortableTextBlock[]
 }
@@ -40,6 +39,7 @@ export interface PagePayload {
   body?: PortableTextBlock[]
   name?: string
   overview?: PortableTextBlock[]
+  showcaseProjects?: ShowcaseProject[]
   pageImage?: Image
   title?: string
   slug?: string

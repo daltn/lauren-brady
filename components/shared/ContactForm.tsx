@@ -19,7 +19,6 @@ export default function ContactForm() {
   const [successMessage, setSuccessMessage] = useState('')
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log({ data })
     axios
       .post('https://eot4359pijjo9u0.m.pipedream.net', data)
       .then((response) => {

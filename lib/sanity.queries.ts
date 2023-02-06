@@ -6,14 +6,6 @@ export const homePageQuery = groq`
     body,
     footer,
     overview,
-    showcaseProjects[]->{
-      _type,
-      coverImage,
-      overview,
-      "slug": slug.current,
-      tags,
-      title,
-    },
     title,
   }
 `
@@ -29,6 +21,14 @@ export const pagesBySlugQuery = groq`
     overview,
     pageImage,
     title,
+    showcaseProjects[]->{
+      _type,
+      coverImage,
+      overview,
+      "slug": slug.current,
+      tags,
+      title,
+    },
     "slug": slug.current,
   }
 `
