@@ -7,6 +7,14 @@ export const homePageQuery = groq`
     footer,
     overview,
     title,
+    showcaseProjects[]->{
+      _type,
+      coverImage,
+      overview,
+      "slug": slug.current,
+      tags,
+      title,
+    },
   }
 `
 
