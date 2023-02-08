@@ -36,7 +36,7 @@ export function ProjectPage({
           <div className="mb-20 space-y-3">
             <Header title={title} description={overview} />
             <section className="flex flex-col text-gray-700 md:flex-row">
-              <div className="w-full md:mr-6 md:w-3/5 md:pt-3">
+              <div className="mb-6 w-full md:mr-6 md:w-3/5 md:pt-3">
                 <div className="text-md mb-[1px]">
                   <strong className="text-md">Type: </strong>
                   {tags?.map((tag, idx) => (
