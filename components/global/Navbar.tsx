@@ -30,11 +30,6 @@ export function Navbar({ menuItems }: NavbarProps) {
               >
                 {menuItem.title}
               </Link>
-              {idx === 0 && (
-                <div className="absolute top-[50px] text-sm text-gray-700 md:top-[55px] md:text-lg">
-                  Director
-                </div>
-              )}
             </div>
           )
         })}
