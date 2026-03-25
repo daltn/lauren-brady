@@ -1,44 +1,80 @@
-import { resolveHref } from 'lib/sanity.links'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { MenuItem } from 'types'
+import type { MenuItem, NavLink } from 'types'
+
 interface NavbarProps {
   menuItems?: MenuItem[]
+  navLinks?: NavLink[]
+  siteName?: string
 }
 
-export function Navbar({ menuItems }: NavbarProps) {
-  const router = useRouter()
-  const slug = router?.query?.slug
-
+export function Navbar({ menuItems, navLinks, siteName = 'Lauren Brady' }: NavbarProps) {
   return (
-    <div className="sticky top-0 z-10 flex flex-wrap items-center justify-items-end gap-x-3 bg-white/80 py-[30px] px-4 backdrop-blur md:gap-x-5  md:px-16 lg:px-32">
-      {menuItems &&
-        menuItems.map((menuItem, idx) => {
-          const href = resolveHref(menuItem?._type, menuItem?.slug)
-          if (!href) {
-            return null
-          }
-
-          const isContact = menuItem?.slug === 'contact'
-          const linkHref = isContact
-            ? 'mailto:lauren.rachel.brady@gmail.com'
-            : href
-
-          return (
-            <div key={idx} className={`${idx === 1 ? 'ml-auto' : ''}`}>
-              <Link
-                className={`hover:text-black sm:text-sm md:text-xl ${
-                  menuItem?._type === 'home'
-                    ? 'font-extrabold text-black'
-                    : 'text-gray-700'
-                } ${menuItem?.slug === slug && 'underline underline-offset-2'}`}
-                href={linkHref}
-              >
-                {menuItem.title}
-              </Link>
-            </div>
-          )
-        })}
-    </div>
+    <nav className="site-nav" style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 100,
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '24px 48px',
+      mixBlendMode: 'multiply',
+    }}>
+      <a
+        href="/"
+        style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: '13px',
+          fontWeight: 500,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: 'var(--site-ink)',
+          textDecoration: 'none',
+        }}
+      >
+        {siteName}
+      </a>
+      <ul className="nav-links-list" style={{ display: 'flex', gap: '32px', listStyle: 'none', margin: 0, padding: 0 }}>
+        {navLinks && navLinks.length > 0
+          ? navLinks.map((link, idx) => (
+              <li key={idx}>
+                <a
+                  href={link.href}
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '13px',
+                    fontWeight: 400,
+                    color: 'var(--site-muted)',
+                    textDecoration: 'none',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          : menuItems?.filter((item) => item._type !== 'home').map((item, idx) => {
+              const href = `/${item.slug}`
+              return (
+                <li key={idx}>
+                  <Link
+                    href={href}
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '13px',
+                      fontWeight: 400,
+                      color: 'var(--site-muted)',
+                      textDecoration: 'none',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              )
+            })}
+      </ul>
+    </nav>
   )
 }

@@ -73,6 +73,12 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'role',
+      title: 'Role',
+      description: 'The production role, e.g. "Creative Director"',
+      type: 'string',
+    }),
+    defineField({
       name: 'artist',
       title: 'Artist',
       type: 'string',

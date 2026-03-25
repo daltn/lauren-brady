@@ -12,18 +12,24 @@ export interface LayoutProps {
   children: React.ReactNode
   settings: SettingsPayload | undefined
   preview?: boolean
+  fullBleed?: boolean
 }
 
 export default function Layout({
   children,
   settings = fallbackSettings,
   preview,
+  fullBleed,
 }: LayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-black">
+    <div className="flex min-h-screen flex-col" style={{ background: 'var(--site-bg)', color: 'var(--site-ink)' }}>
       {preview && <PreviewBanner />}
       <Navbar menuItems={settings?.menuItems} />
-      <div className="mt-20 flex-grow px-4 md:px-16 lg:px-32">{children}</div>
+      {fullBleed ? (
+        <div className="flex-grow">{children}</div>
+      ) : (
+        <div className="mt-20 flex-grow px-4 md:px-16 lg:px-32">{children}</div>
+      )}
       <Footer footer={settings?.footer} />
     </div>
   )

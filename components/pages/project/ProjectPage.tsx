@@ -61,7 +61,7 @@ export function ProjectPage({
 
                 {description && (
                   <CustomPortableText
-                    paragraphClasses="font-sans text-md text-gray-700"
+                    paragraphClasses="font-sans text-md text-gray-700 my-4"
                     value={description}
                   />
                 )}

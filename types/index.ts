@@ -6,6 +6,12 @@ export interface MenuItem {
   title?: string
 }
 
+export interface NavLink {
+  _key?: string
+  label: string
+  href: string
+}
+
 export interface MilestoneItem {
   description?: string
   duration?: {
@@ -20,10 +26,56 @@ export interface MilestoneItem {
 export interface ShowcaseProject {
   _type: string
   coverImage?: Image
+  client?: string
+  role?: string
   overview?: PortableTextBlock[]
   slug?: string
   tags?: string[]
   title?: string
+}
+
+export interface HomeStat {
+  _key?: string
+  statNum: string
+  statLabel: string
+}
+
+export interface HomeCapability {
+  _key?: string
+  label: string
+  tag: string
+}
+
+export interface ExperienceEntry {
+  _key?: string
+  company: string
+  role: string
+  tags: string[]
+  contentParagraphs: string[]
+}
+
+export interface ApproachBlock {
+  _key?: string
+  title: string
+  body: string
+}
+
+export interface ToolGroup {
+  _key?: string
+  heading: string
+  items: string[]
+}
+
+export interface AboutFact {
+  _key?: string
+  label: string
+  value: string
+}
+
+export interface FooterLink {
+  _key?: string
+  label: string
+  href: string
 }
 
 // Page payloads
@@ -34,6 +86,17 @@ export interface HomePagePayload {
   title?: string
   body?: PortableTextBlock[]
   showcaseProjects?: ShowcaseProject[]
+  eyebrow?: string
+  tagline?: string
+  stats?: HomeStat[]
+  capabilities?: HomeCapability[]
+  navLinks?: NavLink[]
+  experienceEntries?: ExperienceEntry[]
+  approachBlocks?: ApproachBlock[]
+  toolGroups?: ToolGroup[]
+  aboutBio?: PortableTextBlock[]
+  aboutFacts?: AboutFact[]
+  footerLinks?: FooterLink[]
 }
 
 export interface PagePayload {
@@ -48,6 +111,7 @@ export interface PagePayload {
 
 export interface ProjectPayload {
   client?: string
+  role?: string
   coverImage?: Image
   description?: PortableTextBlock[]
   video?: PortableTextBlock[]

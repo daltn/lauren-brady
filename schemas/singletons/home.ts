@@ -6,49 +6,29 @@ export default defineType({
   title: 'Home',
   type: 'document',
   icon: HomeIcon,
-  // Uncomment below to have edits publish automatically as you type
-  // liveEdit: true,
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your personal website.',
-      title: 'Title',
+      description: 'Your name — shown as the large hero heading.',
+      title: 'Name',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'overview',
-      description: 'Used for search results',
-      title: 'Description',
+      description: 'Used for search engine results (meta description). Not shown on page.',
+      title: 'SEO Description',
       type: 'array',
       of: [
-        // Paragraphs
         defineArrayMember({
           lists: [],
           marks: {
             annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Link',
-                fields: [
-                  {
-                    name: 'href',
-                    type: 'url',
-                    title: 'Url',
-                  },
-                ],
-              },
+              { name: 'link', type: 'object', title: 'Link', fields: [{ name: 'href', type: 'url', title: 'Url' }] },
             ],
             decorators: [
-              {
-                title: 'Italic',
-                value: 'em',
-              },
-              {
-                title: 'Strong',
-                value: 'strong',
-              },
+              { title: 'Italic', value: 'em' },
+              { title: 'Strong', value: 'strong' },
             ],
           },
           styles: [],
@@ -58,72 +38,104 @@ export default defineType({
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
+      name: 'eyebrow',
+      title: 'Hero Eyebrow',
+      description: 'Small label above the name, e.g. "Creative Producer & Systems Designer"',
+      type: 'string',
+    }),
+    defineField({
+      name: 'tagline',
+      title: 'Hero Tagline',
+      description: 'Brief description below the name.',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
+      name: 'stats',
+      title: 'Hero Stats',
+      description: 'Up to 3 stats shown below the tagline.',
       type: 'array',
-      name: 'body',
-      title: 'Body',
-      description: "This is where you can write the page's content.",
       of: [
-        // Paragraphs
         defineArrayMember({
-          type: 'block',
-          marks: {
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Link',
-                fields: [
-                  {
-                    name: 'href',
-                    type: 'url',
-                    title: 'Url',
-                  },
-                ],
-              },
-            ],
-          },
-          styles: [],
-        }),
-        // Custom blocks
-        defineArrayMember({
-          name: 'youtube',
-          type: 'youtube',
-        }),
-        defineField({
-          type: 'image',
-          icon: ImageIcon,
-          name: 'image',
-          title: 'Image',
-          options: {
-            hotspot: true,
-          },
-          preview: {
-            select: {
-              imageUrl: 'asset.url',
-              title: 'caption',
-            },
-          },
+          type: 'object',
+          name: 'stat',
           fields: [
+            defineField({ name: 'statNum', title: 'Number / Value', type: 'string' }),
+            defineField({ name: 'statLabel', title: 'Label', type: 'string' }),
+          ],
+          preview: { select: { title: 'statNum', subtitle: 'statLabel' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'capabilities',
+      title: 'Hero Capabilities (right column)',
+      description: 'Rows of capabilities shown on the right side of the hero.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'capability',
+          fields: [
+            defineField({ name: 'label', title: 'Label', type: 'string' }),
+            defineField({ name: 'tag', title: 'Tag', type: 'string' }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'tag' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'navLinks',
+      title: 'Navigation Links',
+      description: 'Links shown in the site navigation.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'navLink',
+          fields: [
+            defineField({ name: 'label', title: 'Label', type: 'string' }),
+            defineField({ name: 'href', title: 'URL or Anchor (e.g. #production)', type: 'string' }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'href' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'experienceEntries',
+      title: 'Production Experience',
+      description: 'Work experience entries shown in the Production Experience section.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'experienceEntry',
+          fields: [
+            defineField({ name: 'company', title: 'Company / Project', type: 'string' }),
+            defineField({ name: 'role', title: 'Role', type: 'string' }),
             defineField({
-              title: 'Caption',
-              name: 'caption',
-              type: 'string',
+              name: 'tags',
+              title: 'Tags',
+              type: 'array',
+              of: [{ type: 'string' }],
+              options: { layout: 'tags' },
             }),
             defineField({
-              name: 'alt',
-              type: 'string',
-              title: 'Alt text',
-              description:
-                'Alternative text for screenreaders. Falls back on caption if not set',
+              name: 'contentParagraphs',
+              title: 'Content Paragraphs',
+              description: 'Each item is one paragraph.',
+              type: 'array',
+              of: [{ type: 'text', rows: 3 }],
             }),
           ],
+          preview: { select: { title: 'company', subtitle: 'role' } },
         }),
       ],
     }),
     defineField({
       name: 'showcaseProjects',
-      title: 'Showcase projects',
-      description: 'These are the projects that will appear on your home page',
+      title: 'Selected Work',
+      description: 'Projects shown in the Selected Work grid.',
       type: 'array',
       of: [
         defineArrayMember({
@@ -132,16 +144,133 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'approachBlocks',
+      title: 'Production Approach',
+      description: 'The approach blocks shown in the Production Approach section.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'approachBlock',
+          fields: [
+            defineField({ name: 'title', title: 'Title', type: 'string' }),
+            defineField({ name: 'body', title: 'Body', type: 'text', rows: 3 }),
+          ],
+          preview: { select: { title: 'title' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'toolGroups',
+      title: 'Tools & Technical',
+      description: 'Tool groups shown in the Tools & Technical section.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'toolGroup',
+          fields: [
+            defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+            defineField({
+              name: 'items',
+              title: 'Items',
+              type: 'array',
+              of: [{ type: 'string' }],
+              options: { layout: 'tags' },
+            }),
+          ],
+          preview: { select: { title: 'heading' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'aboutBio',
+      title: 'About Bio',
+      description: 'The bio text shown in the About section (left column).',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          marks: {
+            decorators: [
+              { title: 'Italic', value: 'em' },
+              { title: 'Strong', value: 'strong' },
+            ],
+          },
+          styles: [],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'aboutFacts',
+      title: 'About Facts',
+      description: 'Label/value pairs shown in the right column of the About section.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'aboutFact',
+          fields: [
+            defineField({ name: 'label', title: 'Label', type: 'string' }),
+            defineField({ name: 'value', title: 'Value', type: 'string' }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'value' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'footerLinks',
+      title: 'Footer Links',
+      description: 'Links shown in the site footer.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'footerLink',
+          fields: [
+            defineField({ name: 'label', title: 'Label', type: 'string' }),
+            defineField({ name: 'href', title: 'URL', type: 'string' }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'href' } },
+        }),
+      ],
+    }),
+    defineField({
+      type: 'array',
+      name: 'body',
+      title: 'Body (Legacy)',
+      description: 'Legacy body field. Not shown in new design.',
+      of: [
+        defineArrayMember({
+          type: 'block',
+          marks: {
+            annotations: [
+              { name: 'link', type: 'object', title: 'Link', fields: [{ name: 'href', type: 'url', title: 'Url' }] },
+            ],
+          },
+          styles: [],
+        }),
+        defineArrayMember({ name: 'youtube', type: 'youtube' }),
+        defineField({
+          type: 'image',
+          icon: ImageIcon,
+          name: 'image',
+          title: 'Image',
+          options: { hotspot: true },
+          preview: { select: { imageUrl: 'asset.url', title: 'caption' } },
+          fields: [
+            defineField({ title: 'Caption', name: 'caption', type: 'string' }),
+            defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+          ],
+        }),
+      ],
+    }),
   ],
   preview: {
-    select: {
-      title: 'title',
-    },
+    select: { title: 'title' },
     prepare({ title }) {
-      return {
-        subtitle: 'Home',
-        title,
-      }
+      return { subtitle: 'Home', title }
     },
   },
 })
