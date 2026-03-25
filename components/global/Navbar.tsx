@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { resolveHref } from 'lib/sanity.links'
 import type { MenuItem, NavLink } from 'types'
 
 interface NavbarProps {
@@ -55,7 +56,8 @@ export function Navbar({ menuItems, navLinks, siteName = 'Lauren Brady' }: Navba
               </li>
             ))
           : menuItems?.filter((item) => item._type !== 'home').map((item, idx) => {
-              const href = `/${item.slug}`
+              const href = resolveHref(item._type, item.slug)
+              if (!href) return null
               return (
                 <li key={idx}>
                   <Link

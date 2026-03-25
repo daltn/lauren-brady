@@ -1,6 +1,4 @@
 import { CustomPortableText } from 'components/shared/CustomPortableText'
-import { Header } from 'components/shared/Header'
-import ImageBox from 'components/shared/ImageBox'
 import ScrollUp from 'components/shared/ScrollUp'
 import Head from 'next/head'
 import type { ProjectPayload, SettingsPayload } from 'types'
@@ -21,9 +19,7 @@ export function ProjectPage({
   homePageTitle,
   preview,
 }: ProjectPageProps) {
-  // Default to an empty object to allow previews on non-existent documents
-  const { client, artist, description, overview, tags, title, video } =
-    project || {}
+  const { client, artist, description, tags, title, video } = project || {}
 
   return (
     <>
@@ -32,54 +28,67 @@ export function ProjectPage({
       </Head>
 
       <Layout settings={settings} preview={preview}>
-        <div>
-          <div className="mb-20 space-y-3">
-            <Header title={title} description={overview} />
-            <section className="flex flex-col text-gray-700 md:flex-row">
-              <div className="mb-6 w-full md:mr-6 md:w-3/5 md:pt-3">
-                <div className="text-md mb-[1px]">
-                  <strong className="text-md">Type: </strong>
-                  {tags?.map((tag, idx) => (
-                    <span key={idx} className="">
-                      {idx !== 0 && ', '}
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+        <div style={{ maxWidth: '600px', margin: '0 auto', paddingTop: '40px', paddingBottom: '80px' }}>
 
-                {client && (
-                  <p className="text-md">
-                    <strong className="text-md">Client:</strong> {client}
-                  </p>
-                )}
+          {/* Title */}
+          {title && (
+            <h1 style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(28px, 4vw, 48px)',
+              fontWeight: 400,
+              letterSpacing: '-0.02em',
+              color: 'var(--site-ink)',
+              marginBottom: '24px',
+              lineHeight: 1.1,
+            }}>
+              {title}
+            </h1>
+          )}
 
-                {artist && (
-                  <p className="text-md">
-                    <strong className="text-md">Artist: </strong> {artist}
-                  </p>
-                )}
-
-                {description && (
-                  <CustomPortableText
-                    paragraphClasses="font-sans text-md text-gray-700 my-4"
-                    value={description}
-                  />
-                )}
-              </div>
-              <div className="w-full md:w-1/2">
-                {video && (
-                  <CustomPortableText
-                    paragraphClasses="font-sans text-md text-gray-700"
-                    value={video}
-                  />
-                )}
-              </div>
-            </section>
-            {/* Workaround: scroll to top on route change */}
-            <ScrollUp />
+          {/* Meta */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', marginBottom: '32px' }}>
+            {tags && tags.length > 0 && (
+              <span style={{ fontSize: '13px', color: 'var(--site-muted)' }}>
+                <strong style={{ color: 'var(--site-ink)', fontWeight: 500 }}>Type: </strong>
+                {tags.join(', ')}
+              </span>
+            )}
+            {client && (
+              <span style={{ fontSize: '13px', color: 'var(--site-muted)' }}>
+                <strong style={{ color: 'var(--site-ink)', fontWeight: 500 }}>Client: </strong>
+                {client}
+              </span>
+            )}
+            {artist && (
+              <span style={{ fontSize: '13px', color: 'var(--site-muted)' }}>
+                <strong style={{ color: 'var(--site-ink)', fontWeight: 500 }}>Artist: </strong>
+                {artist}
+              </span>
+            )}
           </div>
-          <div className="absolute left-0 w-screen border-t" />
+
+          {/* Description */}
+          {description && (
+            <div style={{ margin: '15px 0', fontSize: '15px', lineHeight: 1.7, color: 'var(--site-ink)' }}>
+              <CustomPortableText
+                paragraphClasses="font-sans"
+                value={description}
+              />
+            </div>
+          )}
+
+          {/* Video / images */}
+          {video && (
+            <div>
+              <CustomPortableText
+                paragraphClasses="font-sans"
+                value={video}
+              />
+            </div>
+          )}
+
         </div>
+        <ScrollUp />
       </Layout>
     </>
   )
