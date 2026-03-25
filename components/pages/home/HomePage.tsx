@@ -64,12 +64,6 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
       padding: '96px 48px',
       borderBottom: '1px solid var(--site-rule)',
     } as React.CSSProperties,
-    sectionHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'baseline',
-      marginBottom: '64px',
-    } as React.CSSProperties,
     sectionTitle: {
       fontFamily: 'var(--font-serif)',
       fontSize: 'clamp(32px, 3.5vw, 48px)',
@@ -78,13 +72,6 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
       color: 'var(--site-ink)',
       margin: 0,
     } as React.CSSProperties,
-    sectionNum: {
-      fontSize: '12px',
-      color: 'var(--site-muted)',
-      letterSpacing: '0.1em',
-      fontWeight: 500,
-      textTransform: 'uppercase' as const,
-    },
   }
 
   // Split name for italic last name rendering
@@ -153,17 +140,14 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
           )}
           <div className="hero-ctas-anim" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <a href="#work" className="btn-primary">Selected Work</a>
-            <a href="#production" className="btn-secondary">Production Experience</a>
+            <a href="#production" className="btn-secondary">Production</a>
           </div>
         </section>
 
         {/* SELECTED WORK */}
         {showcaseProjects && showcaseProjects.length > 0 && (
           <section id="work" className="site-section" style={s.section}>
-            <div style={s.sectionHeader}>
-              <h2 style={s.sectionTitle}>Selected Work</h2>
-              <span style={s.sectionNum}>01</span>
-            </div>
+            <h2 style={{...s.sectionTitle, marginBottom: '64px'}}>Selected Work</h2>
             <div className="work-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
@@ -236,10 +220,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         {/* PRODUCTION EXPERIENCE */}
         {experienceEntries && experienceEntries.length > 0 && (
           <section id="production" className="site-section" style={s.section}>
-            <div style={s.sectionHeader}>
-              <h2 style={s.sectionTitle}>Production Experience</h2>
-              <span style={s.sectionNum}>02</span>
-            </div>
+            <h2 style={{...s.sectionTitle, marginBottom: '64px'}}>Production</h2>
             {experienceEntries.map((entry, i) => (
               <div key={i} className="animate-on-scroll experience-entry" style={{
                 display: 'grid',
@@ -306,10 +287,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         {/* PRODUCTION APPROACH */}
         {approachBlocks && approachBlocks.length > 0 && (
           <section id="approach" className="site-section" style={s.section}>
-            <div style={s.sectionHeader}>
-              <h2 style={s.sectionTitle}>Production Approach</h2>
-              <span style={s.sectionNum}>03</span>
-            </div>
+            <h2 style={{...s.sectionTitle, marginBottom: '64px'}}>Production Approach</h2>
             <div className="approach-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
@@ -358,10 +336,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         {/* TOOLS */}
         {toolGroups && toolGroups.length > 0 && (
           <section className="site-section" style={s.section}>
-            <div style={s.sectionHeader}>
-              <h2 style={s.sectionTitle}>Tools &amp; Technical</h2>
-              <span style={s.sectionNum}>04</span>
-            </div>
+            <h2 style={{...s.sectionTitle, marginBottom: '64px'}}>Tools &amp; Technical</h2>
             <div className="tools-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
@@ -396,10 +371,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
 
         {/* ABOUT */}
         <section id="about" className="site-section" style={s.section}>
-          <div style={s.sectionHeader}>
-            <h2 style={s.sectionTitle}>About</h2>
-            <span style={s.sectionNum}>05</span>
-          </div>
+          <h2 style={{...s.sectionTitle, marginBottom: '64px'}}>About</h2>
           <div className="about-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -461,7 +433,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         </section>
 
         {/* FOOTER */}
-        <Footer footerLinks={footerLinks} siteName={title} />
+        <Footer />
 
         <ScrollUp />
       </div>

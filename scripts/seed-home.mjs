@@ -48,23 +48,12 @@ const aboutBio = [
 const patch = {
   eyebrow: 'Creative Producer & Systems Designer',
   tagline: 'Building and operating multi-platform media, events, and collaborative production systems.',
-  stats: [
-    { _key: key(), statNum: '70+', statLabel: 'Campaigns Produced' },
-    { _key: key(), statNum: '$1.5M', statLabel: 'Budget Managed' },
-    { _key: key(), statNum: '8+', statLabel: 'Years Experience' },
-  ],
-  capabilities: [
-    { _key: key(), label: 'Multi-platform Delivery', tag: 'Broadcast · Digital · Live' },
-    { _key: key(), label: 'Cross-functional Leadership', tag: 'Design · Motion · Engineering' },
-    { _key: key(), label: 'Pipeline Development', tag: 'Workflows · Tooling · QC' },
-    { _key: key(), label: 'Budget & Schedule Management', tag: '$250K – $1.5MM' },
-    { _key: key(), label: 'Systems Architecture', tag: 'Events · Media · Broadcast' },
-  ],
   navLinks: [
-    { _key: key(), label: 'Production', href: '#production' },
     { _key: key(), label: 'Work', href: '#work' },
+    { _key: key(), label: 'Production', href: '#production' },
     { _key: key(), label: 'Approach', href: '#approach' },
     { _key: key(), label: 'About', href: '#about' },
+    { _key: key(), label: 'Events', href: '/events' },
   ],
   experienceEntries: [
     {
@@ -191,7 +180,6 @@ const patch = {
   footerLinks: [
     { _key: key(), label: 'Email', href: 'mailto:lauren@lauren-brady.com' },
     { _key: key(), label: 'LinkedIn', href: '#' },
-    { _key: key(), label: 'Resume PDF', href: '#' },
   ],
 }
 
