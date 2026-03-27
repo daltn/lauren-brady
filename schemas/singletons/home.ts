@@ -1,4 +1,4 @@
-import { HomeIcon, ImageIcon } from '@sanity/icons'
+import { HomeIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -49,40 +49,6 @@ export default defineType({
       description: 'Brief description below the name.',
       type: 'text',
       rows: 2,
-    }),
-    defineField({
-      name: 'stats',
-      title: 'Hero Stats',
-      description: 'Up to 3 stats shown below the tagline.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'stat',
-          fields: [
-            defineField({ name: 'statNum', title: 'Number / Value', type: 'string' }),
-            defineField({ name: 'statLabel', title: 'Label', type: 'string' }),
-          ],
-          preview: { select: { title: 'statNum', subtitle: 'statLabel' } },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'capabilities',
-      title: 'Hero Capabilities (right column)',
-      description: 'Rows of capabilities shown on the right side of the hero.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'capability',
-          fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'tag', title: 'Tag', type: 'string' }),
-          ],
-          preview: { select: { title: 'label', subtitle: 'tag' } },
-        }),
-      ],
     }),
     defineField({
       name: 'navLinks',
@@ -186,29 +152,6 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'toolGroups',
-      title: 'Tools & Technical',
-      description: 'Tool groups shown in the Tools & Technical section.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'toolGroup',
-          fields: [
-            defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({
-              name: 'items',
-              title: 'Items',
-              type: 'array',
-              of: [{ type: 'string' }],
-              options: { layout: 'tags' },
-            }),
-          ],
-          preview: { select: { title: 'heading' } },
-        }),
-      ],
-    }),
-    defineField({
       name: 'clientLogos',
       title: 'Clients — Logos',
       description: 'Client logos shown in the About section.',
@@ -256,70 +199,6 @@ export default defineType({
             ],
           },
           styles: [],
-        }),
-      ],
-    }),
-    defineField({
-      name: 'aboutFacts',
-      title: 'About Facts',
-      description: 'Label/value pairs shown in the right column of the About section.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'aboutFact',
-          fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'value', title: 'Value', type: 'string' }),
-          ],
-          preview: { select: { title: 'label', subtitle: 'value' } },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'footerLinks',
-      title: 'Footer Links',
-      description: 'Links shown in the site footer.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'footerLink',
-          fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'href', title: 'URL', type: 'string' }),
-          ],
-          preview: { select: { title: 'label', subtitle: 'href' } },
-        }),
-      ],
-    }),
-    defineField({
-      type: 'array',
-      name: 'body',
-      title: 'Body (Legacy)',
-      description: 'Legacy body field. Not shown in new design.',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          marks: {
-            annotations: [
-              { name: 'link', type: 'object', title: 'Link', fields: [{ name: 'href', type: 'url', title: 'Url' }] },
-            ],
-          },
-          styles: [],
-        }),
-        defineArrayMember({ name: 'youtube', type: 'youtube' }),
-        defineField({
-          type: 'image',
-          icon: ImageIcon,
-          name: 'image',
-          title: 'Image',
-          options: { hotspot: true },
-          preview: { select: { imageUrl: 'asset.url', title: 'caption' } },
-          fields: [
-            defineField({ title: 'Caption', name: 'caption', type: 'string' }),
-            defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-          ],
         }),
       ],
     }),

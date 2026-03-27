@@ -79,11 +79,6 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'artist',
-      title: 'Artist',
-      type: 'string',
-    }),
-    defineField({
       name: 'tags',
       title: 'Type',
       type: 'array',

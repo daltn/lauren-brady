@@ -14,8 +14,6 @@ import design from 'schemas/documents/design'
 import event from 'schemas/documents/event'
 import page from 'schemas/documents/page'
 import project from 'schemas/documents/project'
-import duration from 'schemas/objects/duration'
-import milestone from 'schemas/objects/milestone'
 import youtube from 'schemas/objects/youtube'
 import home from 'schemas/singletons/home'
 import settings from 'schemas/singletons/settings'
@@ -40,13 +38,11 @@ export default defineConfig({
       home,
       settings,
       // Documents
-      duration,
       event,
       design,
       page,
       project,
       // Objects
-      milestone,
       youtube,
     ],
   },

@@ -12,17 +12,6 @@ export interface NavLink {
   href: string
 }
 
-export interface MilestoneItem {
-  description?: string
-  duration?: {
-    start?: string
-    end?: string
-  }
-  image?: Image
-  tags?: string[]
-  title?: string
-}
-
 export interface ShowcaseProject {
   _type: string
   coverImage?: Image
@@ -32,18 +21,6 @@ export interface ShowcaseProject {
   slug?: string
   tags?: string[]
   title?: string
-}
-
-export interface HomeStat {
-  _key?: string
-  statNum: string
-  statLabel: string
-}
-
-export interface HomeCapability {
-  _key?: string
-  label: string
-  tag: string
 }
 
 export interface ExperienceEntry {
@@ -58,24 +35,6 @@ export interface ApproachBlock {
   _key?: string
   title: string
   body: string
-}
-
-export interface ToolGroup {
-  _key?: string
-  heading: string
-  items: string[]
-}
-
-export interface AboutFact {
-  _key?: string
-  label: string
-  value: string
-}
-
-export interface FooterLink {
-  _key?: string
-  label: string
-  href: string
 }
 
 export interface ClientLogo {
@@ -111,26 +70,19 @@ export interface GalleryImage {
 // Page payloads
 
 export interface HomePagePayload {
-  footer?: PortableTextBlock[]
   overview?: PortableTextBlock[]
   title?: string
-  body?: PortableTextBlock[]
   showcaseProjects?: ShowcaseProject[]
   showcaseEvents?: ShowcaseEvent[]
   showcaseDesign?: ShowcaseDesign[]
   eyebrow?: string
   tagline?: string
-  stats?: HomeStat[]
-  capabilities?: HomeCapability[]
   navLinks?: NavLink[]
   experienceEntries?: ExperienceEntry[]
   approachBlocks?: ApproachBlock[]
-  toolGroups?: ToolGroup[]
   clientLogos?: ClientLogo[]
   aboutImage?: Image & { alt?: string }
   aboutBio?: PortableTextBlock[]
-  aboutFacts?: AboutFact[]
-  footerLinks?: FooterLink[]
 }
 
 export interface EventItemPayload {
@@ -168,12 +120,7 @@ export interface ProjectPayload {
   coverImage?: Image
   description?: PortableTextBlock[]
   video?: PortableTextBlock[]
-  duration?: {
-    start?: string
-    end?: string
-  }
   overview?: PortableTextBlock[]
-  artist?: string
   slug: string
   tags?: string[]
   title?: string

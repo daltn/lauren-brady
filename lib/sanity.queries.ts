@@ -3,18 +3,13 @@ import { groq } from 'next-sanity'
 export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,
-    body,
-    footer,
     overview,
     title,
     eyebrow,
     tagline,
-    stats,
-    capabilities,
     navLinks,
     experienceEntries,
     approachBlocks,
-    toolGroups,
     clientLogos[]{
       _key,
       logo,
@@ -23,8 +18,6 @@ export const homePageQuery = groq`
     },
     aboutImage,
     aboutBio,
-    aboutFacts,
-    footerLinks,
     showcaseProjects[]->{
       _type,
       coverImage,
@@ -86,14 +79,11 @@ export const projectBySlugQuery = groq`
     _id,
     client,
     role,
-    artist,
     coverImage,
     description,
     video,
-    duration,
     overview,
     "slug": slug.current,
-    starring,
     tags,
     title,
   }
