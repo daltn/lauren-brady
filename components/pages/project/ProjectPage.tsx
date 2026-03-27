@@ -1,7 +1,7 @@
 import { CustomPortableText } from 'components/shared/CustomPortableText'
 import ScrollUp from 'components/shared/ScrollUp'
 import Head from 'next/head'
-import type { ProjectPayload, SettingsPayload } from 'types'
+import type { NavLink, ProjectPayload, SettingsPayload } from 'types'
 
 import Layout from '../../shared/Layout'
 import ProjectPageHead from './ProjectPageHead'
@@ -10,6 +10,7 @@ export interface ProjectPageProps {
   project: ProjectPayload | undefined
   settings: SettingsPayload | undefined
   homePageTitle: string | undefined
+  navLinks?: NavLink[]
   preview?: boolean
 }
 
@@ -17,6 +18,7 @@ export function ProjectPage({
   project,
   settings,
   homePageTitle,
+  navLinks,
   preview,
 }: ProjectPageProps) {
   const { client, artist, description, tags, title, video } = project || {}
@@ -27,7 +29,7 @@ export function ProjectPage({
         <ProjectPageHead project={project} title={homePageTitle} />
       </Head>
 
-      <Layout settings={settings} preview={preview}>
+      <Layout settings={settings} navLinks={navLinks} preview={preview}>
         <div style={{ maxWidth: '600px', margin: '0 auto', paddingTop: '40px', paddingBottom: '80px' }}>
 
           {/* Title */}

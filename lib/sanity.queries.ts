@@ -35,6 +35,10 @@ export const homePageTitleQuery = groq`
   *[_type == "home"][0].title
 `
 
+export const homeNavLinksQuery = groq`
+  *[_type == "home"][0].navLinks
+`
+
 export const pagesBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
     _id,

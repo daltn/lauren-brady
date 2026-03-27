@@ -1,7 +1,7 @@
 import { Footer } from 'components/global/Footer'
 import { Navbar } from 'components/global/Navbar'
 import { PreviewBanner } from 'components/preview/PreviewBanner'
-import { SettingsPayload } from 'types'
+import { NavLink, SettingsPayload } from 'types'
 
 const fallbackSettings: SettingsPayload = {
   menuItems: [],
@@ -10,6 +10,7 @@ const fallbackSettings: SettingsPayload = {
 export interface LayoutProps {
   children: React.ReactNode
   settings: SettingsPayload | undefined
+  navLinks?: NavLink[]
   preview?: boolean
   fullBleed?: boolean
 }
@@ -17,13 +18,14 @@ export interface LayoutProps {
 export default function Layout({
   children,
   settings = fallbackSettings,
+  navLinks,
   preview,
   fullBleed,
 }: LayoutProps) {
   return (
     <div className="flex min-h-screen flex-col" style={{ background: 'var(--site-bg)', color: 'var(--site-ink)' }}>
       {preview && <PreviewBanner />}
-      <Navbar menuItems={settings?.menuItems} />
+      <Navbar menuItems={settings?.menuItems} navLinks={navLinks} />
       {fullBleed ? (
         <div className="flex-grow">{children}</div>
       ) : (

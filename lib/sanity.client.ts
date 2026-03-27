@@ -1,5 +1,6 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  homeNavLinksQuery,
   homePageQuery,
   homePageTitleQuery,
   pagePaths,
@@ -11,6 +12,7 @@ import {
 import { createClient } from 'next-sanity'
 import type {
   HomePagePayload,
+  NavLink,
   PagePayload,
   ProjectPayload,
   SettingsPayload,
@@ -39,6 +41,14 @@ export async function getHomePageTitle({
   token?: string
 }): Promise<string | undefined> {
   return await sanityClient(token)?.fetch(homePageTitleQuery)
+}
+
+export async function getHomeNavLinks({
+  token,
+}: {
+  token?: string
+}): Promise<NavLink[] | undefined> {
+  return await sanityClient(token)?.fetch(homeNavLinksQuery)
 }
 
 export async function getPageBySlug({
