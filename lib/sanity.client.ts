@@ -1,5 +1,9 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  designBySlugQuery,
+  designPaths,
+  eventBySlugQuery,
+  eventPaths,
   homeNavLinksQuery,
   homePageQuery,
   homePageTitleQuery,
@@ -11,6 +15,8 @@ import {
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
 import type {
+  DesignItemPayload,
+  EventItemPayload,
   HomePagePayload,
   NavLink,
   PagePayload,
@@ -79,8 +85,36 @@ export async function getSettings({
   return await sanityClient(token)?.fetch(settingsQuery)
 }
 
+export async function getEventBySlug({
+  slug,
+  token,
+}: {
+  slug: string
+  token?: string
+}): Promise<EventItemPayload | undefined> {
+  return await sanityClient(token)?.fetch(eventBySlugQuery, { slug })
+}
+
+export async function getDesignBySlug({
+  slug,
+  token,
+}: {
+  slug: string
+  token?: string
+}): Promise<DesignItemPayload | undefined> {
+  return await sanityClient(token)?.fetch(designBySlugQuery, { slug })
+}
+
 export async function getProjectPaths(): Promise<string[]> {
   return await sanityClient()?.fetch(projectPaths)
+}
+
+export async function getEventPaths(): Promise<string[]> {
+  return await sanityClient()?.fetch(eventPaths)
+}
+
+export async function getDesignPaths(): Promise<string[]> {
+  return await sanityClient()?.fetch(designPaths)
 }
 
 export async function getPagePaths(): Promise<string[]> {

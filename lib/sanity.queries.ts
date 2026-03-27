@@ -15,6 +15,13 @@ export const homePageQuery = groq`
     experienceEntries,
     approachBlocks,
     toolGroups,
+    clientLogos[]{
+      _key,
+      logo,
+      name,
+      url,
+    },
+    aboutImage,
     aboutBio,
     aboutFacts,
     footerLinks,
@@ -26,6 +33,20 @@ export const homePageQuery = groq`
       overview,
       "slug": slug.current,
       tags,
+      title,
+    },
+    showcaseEvents[]->{
+      _type,
+      coverImage,
+      overview,
+      "slug": slug.current,
+      title,
+    },
+    showcaseDesign[]->{
+      _type,
+      coverImage,
+      overview,
+      "slug": slug.current,
       title,
     },
   }
@@ -80,6 +101,42 @@ export const projectBySlugQuery = groq`
 
 export const projectPaths = groq`
   *[_type == "project" && slug.current != null].slug.current
+`
+
+export const eventBySlugQuery = groq`
+  *[_type == "event" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    overview,
+    coverImage,
+    description,
+    images[]{
+      _key,
+      asset,
+      alt,
+      caption,
+    },
+  }
+`
+
+export const designBySlugQuery = groq`
+  *[_type == "design" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    overview,
+    coverImage,
+    body,
+  }
+`
+
+export const eventPaths = groq`
+  *[_type == "event" && slug.current != null].slug.current
+`
+
+export const designPaths = groq`
+  *[_type == "design" && slug.current != null].slug.current
 `
 
 export const pagePaths = groq`

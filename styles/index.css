@@ -91,6 +91,38 @@ html {
   opacity: 0.88 !important;
 }
 
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--site-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--site-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover {
+  color: var(--site-ink);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
 .btn-primary {
   display: inline-block;
   padding: 14px 28px;
@@ -129,10 +161,31 @@ html {
   transform: translateY(-2px);
 }
 
+/* ── Event image grid ────────────────────────────────────── */
+
+.event-image-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+@media (min-width: 600px) {
+  .event-image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .event-image-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* ── Responsive ─────────────────────────────────────────── */
 
 @media (max-width: 768px) {
-  .nav-links-list { display: none; }
+  .nav-links-list { display: none !important; }
+  .nav-hamburger { display: block !important; }
   .site-nav { padding: 20px 24px !important; }
 
   .hero-section {
@@ -161,16 +214,18 @@ html {
     gap: 32px !important;
   }
 
-  .about-grid {
+  .about-bio-grid {
     grid-template-columns: 1fr !important;
-    gap: 48px !important;
+    gap: 40px !important;
   }
 
-  .about-facts-col {
-    border-left: none !important;
-    padding-left: 0 !important;
-    border-top: 1px solid var(--site-rule);
-    padding-top: 32px;
+  .about-bio-grid > div:last-child {
+    max-width: 100% !important;
+  }
+
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
   }
 }
 
@@ -194,5 +249,9 @@ html {
   .experience-entry {
     grid-template-columns: 200px 1fr !important;
     gap: 32px !important;
+  }
+
+  .clients-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }

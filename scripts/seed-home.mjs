@@ -49,11 +49,10 @@ const patch = {
   eyebrow: 'Creative Producer & Systems Designer',
   tagline: 'Building and operating multi-platform media, events, and collaborative production systems.',
   navLinks: [
-    { _key: key(), label: 'Work', href: '#work' },
-    { _key: key(), label: 'Production', href: '#production' },
-    { _key: key(), label: 'Approach', href: '#approach' },
+    { _key: key(), label: 'Media', href: '#media' },
+    { _key: key(), label: 'Events', href: '#events' },
+    { _key: key(), label: 'Design', href: '#design' },
     { _key: key(), label: 'About', href: '#about' },
-    { _key: key(), label: 'Events', href: '/events' },
   ],
   experienceEntries: [
     {

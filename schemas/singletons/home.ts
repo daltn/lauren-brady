@@ -134,13 +134,37 @@ export default defineType({
     }),
     defineField({
       name: 'showcaseProjects',
-      title: 'Selected Work',
-      description: 'Projects shown in the Selected Work grid.',
+      title: 'Media — Selected Work',
+      description: 'Projects shown in the Media grid.',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'reference',
           to: [{ type: 'project' }],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'showcaseEvents',
+      title: 'Events — Featured',
+      description: 'Events shown in the Events grid on the homepage.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: [{ type: 'event' }],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'showcaseDesign',
+      title: 'Design — Featured',
+      description: 'Design items shown in the Design grid on the homepage.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: [{ type: 'design' }],
         }),
       ],
     }),
@@ -182,6 +206,39 @@ export default defineType({
           ],
           preview: { select: { title: 'heading' } },
         }),
+      ],
+    }),
+    defineField({
+      name: 'clientLogos',
+      title: 'Clients — Logos',
+      description: 'Client logos shown in the About section.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'clientLogo',
+          fields: [
+            defineField({
+              name: 'logo',
+              title: 'Logo',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({ name: 'name', title: 'Client Name', type: 'string' }),
+            defineField({ name: 'url', title: 'Link URL (optional)', type: 'url' }),
+          ],
+          preview: { select: { title: 'name', media: 'logo' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'aboutImage',
+      title: 'About Image',
+      description: 'Photo shown alongside the bio in the About section.',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
       ],
     }),
     defineField({

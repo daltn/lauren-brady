@@ -78,6 +78,36 @@ export interface FooterLink {
   href: string
 }
 
+export interface ClientLogo {
+  _key?: string
+  logo?: Image
+  name?: string
+  url?: string
+}
+
+export interface ShowcaseEvent {
+  _type: string
+  coverImage?: Image
+  overview?: PortableTextBlock[]
+  slug?: string
+  title?: string
+}
+
+export interface ShowcaseDesign {
+  _type: string
+  coverImage?: Image
+  overview?: PortableTextBlock[]
+  slug?: string
+  title?: string
+}
+
+export interface GalleryImage {
+  _key?: string
+  asset?: Image['asset']
+  alt?: string
+  caption?: string
+}
+
 // Page payloads
 
 export interface HomePagePayload {
@@ -86,6 +116,8 @@ export interface HomePagePayload {
   title?: string
   body?: PortableTextBlock[]
   showcaseProjects?: ShowcaseProject[]
+  showcaseEvents?: ShowcaseEvent[]
+  showcaseDesign?: ShowcaseDesign[]
   eyebrow?: string
   tagline?: string
   stats?: HomeStat[]
@@ -94,9 +126,30 @@ export interface HomePagePayload {
   experienceEntries?: ExperienceEntry[]
   approachBlocks?: ApproachBlock[]
   toolGroups?: ToolGroup[]
+  clientLogos?: ClientLogo[]
+  aboutImage?: Image & { alt?: string }
   aboutBio?: PortableTextBlock[]
   aboutFacts?: AboutFact[]
   footerLinks?: FooterLink[]
+}
+
+export interface EventItemPayload {
+  _id?: string
+  title?: string
+  slug: string
+  overview?: PortableTextBlock[]
+  coverImage?: Image
+  description?: PortableTextBlock[]
+  images?: GalleryImage[]
+}
+
+export interface DesignItemPayload {
+  _id?: string
+  title?: string
+  slug: string
+  overview?: PortableTextBlock[]
+  coverImage?: Image
+  body?: PortableTextBlock[]
 }
 
 export interface PagePayload {
