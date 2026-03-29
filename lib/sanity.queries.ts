@@ -18,30 +18,6 @@ export const homePageQuery = groq`
     },
     aboutImage,
     aboutBio,
-    showcaseProjects[]->{
-      _type,
-      coverImage,
-      client,
-      role,
-      overview,
-      "slug": slug.current,
-      tags,
-      title,
-    },
-    showcaseEvents[]->{
-      _type,
-      coverImage,
-      overview,
-      "slug": slug.current,
-      title,
-    },
-    showcaseDesign[]->{
-      _type,
-      coverImage,
-      overview,
-      "slug": slug.current,
-      title,
-    },
   }
 `
 
@@ -62,6 +38,7 @@ export const pagesBySlugQuery = groq`
     title,
     showcaseProjects[]->{
       _type,
+      category,
       coverImage,
       client,
       role,
@@ -77,6 +54,7 @@ export const pagesBySlugQuery = groq`
 export const projectBySlugQuery = groq`
   *[_type == "project" && slug.current == $slug][0] {
     _id,
+    category,
     client,
     role,
     coverImage,
@@ -85,6 +63,40 @@ export const projectBySlugQuery = groq`
     overview,
     "slug": slug.current,
     tags,
+    title,
+  }
+`
+
+export const allProjectsQuery = groq`
+  *[_type == "project"] | order(order asc, _createdAt desc) {
+    _type,
+    category,
+    coverImage,
+    client,
+    role,
+    overview,
+    "slug": slug.current,
+    tags,
+    title,
+  }
+`
+
+export const allEventsQuery = groq`
+  *[_type == "event"] | order(order asc, _createdAt desc) {
+    _type,
+    coverImage,
+    overview,
+    "slug": slug.current,
+    title,
+  }
+`
+
+export const allDesignQuery = groq`
+  *[_type == "design"] | order(order asc, _createdAt desc) {
+    _type,
+    coverImage,
+    overview,
+    "slug": slug.current,
     title,
   }
 `

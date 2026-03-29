@@ -14,6 +14,7 @@ export interface NavLink {
 
 export interface ShowcaseProject {
   _type: string
+  category?: string
   coverImage?: Image
   client?: string
   role?: string
@@ -72,9 +73,6 @@ export interface GalleryImage {
 export interface HomePagePayload {
   overview?: PortableTextBlock[]
   title?: string
-  showcaseProjects?: ShowcaseProject[]
-  showcaseEvents?: ShowcaseEvent[]
-  showcaseDesign?: ShowcaseDesign[]
   eyebrow?: string
   tagline?: string
   navLinks?: NavLink[]
@@ -115,6 +113,7 @@ export interface PagePayload {
 }
 
 export interface ProjectPayload {
+  category?: string
   client?: string
   role?: string
   coverImage?: Image

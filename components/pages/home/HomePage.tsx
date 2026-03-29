@@ -2,7 +2,13 @@ import { urlForImage } from 'lib/sanity.image'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import type { HomePagePayload, SettingsPayload } from 'types'
+import type {
+  HomePagePayload,
+  SettingsPayload,
+  ShowcaseDesign,
+  ShowcaseEvent,
+  ShowcaseProject,
+} from 'types'
 import { Navbar } from 'components/global/Navbar'
 import { Footer } from 'components/global/Footer'
 import HomePageHead from './HomePageHead'
@@ -12,19 +18,26 @@ import ScrollUp from 'components/shared/ScrollUp'
 export interface HomePageProps {
   settings?: SettingsPayload
   page?: HomePagePayload
+  projects?: ShowcaseProject[]
+  events?: ShowcaseEvent[]
+  design?: ShowcaseDesign[]
   preview?: boolean
 }
 
-export function HomePage({ page, settings, preview }: HomePageProps) {
+export function HomePage({
+  page,
+  settings,
+  projects = [],
+  events = [],
+  design = [],
+  preview,
+}: HomePageProps) {
   const {
     title = 'Lauren Brady',
     eyebrow,
     tagline,
     navLinks,
     experienceEntries,
-    showcaseProjects,
-    showcaseEvents,
-    showcaseDesign,
     approachBlocks,
     clientLogos,
     aboutImage,
@@ -187,96 +200,128 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         </section>
 
         {/* MEDIA */}
-        {showcaseProjects && showcaseProjects.length > 0 && (
+        {projects && projects.length > 0 && (
           <section id="media" className="site-section" style={s.section}>
-            <h2 style={{ ...s.sectionTitle, marginBottom: '64px' }}>Media</h2>
-            <div
-              className="work-grid"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '2px',
-              }}
-            >
-              {showcaseProjects.map((project, i) => {
-                const imageUrl = project.coverImage
-                  ? urlForImage(project.coverImage)
-                      ?.width(800)
-                      .height(600)
-                      .fit('crop')
-                      .url()
-                  : null
-                const bgColor = fallbackColors[i % fallbackColors.length]
-                const href = `/projects/${project.slug}`
-                return (
-                  <Link key={i} href={href} style={{ textDecoration: 'none' }}>
-                    <div
-                      className="animate-on-scroll work-card-container"
-                      style={{
-                        position: 'relative',
-                        aspectRatio: '4/3',
-                        overflow: 'hidden',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          background: imageUrl
-                            ? `url(${imageUrl}) center/cover no-repeat`
-                            : bgColor,
-                          transition: 'transform 0.5s ease',
-                        }}
-                      />
-                      <div
-                        className="work-card-overlay"
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'var(--site-ink)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'flex-end',
-                          padding: '28px',
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontFamily: 'var(--font-serif)',
-                            fontSize: '22px',
-                            fontWeight: 400,
-                            color: 'var(--site-warm)',
-                            marginBottom: '4px',
-                          }}
-                        >
-                          {project.title}
-                        </p>
-                        {(project.client || project.role) && (
-                          <p
+            <h2 style={{ ...s.sectionTitle, marginBottom: '80px' }}>Media</h2>
+            {(
+              [
+                { key: 'branded', label: 'Branded' },
+                { key: 'film-tv', label: 'Film & TV' },
+                { key: 'radio', label: 'Radio' },
+                { key: null, label: 'Other' },
+              ] as { key: string | null; label: string }[]
+            ).map(({ key, label }) => {
+              const group =
+                key === null
+                  ? projects.filter(
+                      (p) =>
+                        !p.category ||
+                        !['branded', 'film-tv', 'radio'].includes(p.category)
+                    )
+                  : projects.filter((p) => p.category === key)
+              if (group.length === 0) return null
+              return (
+                <div key={key} style={{ marginBottom: '80px' }}>
+                  <h3
+                    style={{
+                      ...s.subHeading,
+                      marginBottom: '40px',
+                      paddingBottom: '20px',
+                      borderBottom: '1px solid var(--site-rule)',
+                    }}
+                  >
+                    {label}
+                  </h3>
+                  <div
+                    className="work-grid"
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(3, 1fr)',
+                      gap: '2px',
+                    }}
+                  >
+                    {group.map((project, i) => {
+                      const imageUrl = project.coverImage
+                        ? urlForImage(project.coverImage)
+                            ?.width(800)
+                            .height(600)
+                            .fit('crop')
+                            .url()
+                        : null
+                      const bgColor = fallbackColors[i % fallbackColors.length]
+                      const href = `/projects/${project.slug}`
+                      return (
+                        <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                          <div
+                            className="animate-on-scroll work-card-container"
                             style={{
-                              fontSize: '12px',
-                              color: 'rgba(255,255,255,0.6)',
-                              letterSpacing: '0.06em',
-                              textTransform: 'uppercase',
+                              position: 'relative',
+                              aspectRatio: '4/3',
+                              overflow: 'hidden',
+                              cursor: 'pointer',
                             }}
                           >
-                            {[project.client, project.role]
-                              .filter(Boolean)
-                              .join(' · ')}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
+                            <div
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                background: imageUrl
+                                  ? `url(${imageUrl}) center/cover no-repeat`
+                                  : bgColor,
+                                transition: 'transform 0.5s ease',
+                              }}
+                            />
+                            <div
+                              className="work-card-overlay"
+                              style={{
+                                position: 'absolute',
+                                inset: 0,
+                                background: 'var(--site-ink)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'flex-end',
+                                padding: '28px',
+                              }}
+                            >
+                              <p
+                                style={{
+                                  fontFamily: 'var(--font-serif)',
+                                  fontSize: '22px',
+                                  fontWeight: 400,
+                                  color: 'var(--site-warm)',
+                                  marginBottom: '4px',
+                                }}
+                              >
+                                {project.title}
+                              </p>
+                              {(project.client || project.role) && (
+                                <p
+                                  style={{
+                                    fontSize: '12px',
+                                    color: 'rgba(255,255,255,0.6)',
+                                    letterSpacing: '0.06em',
+                                    textTransform: 'uppercase',
+                                  }}
+                                >
+                                  {[project.client, project.role]
+                                    .filter(Boolean)
+                                    .join(' · ')}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
           </section>
         )}
 
         {/* EVENTS */}
-        {showcaseEvents && showcaseEvents.length > 0 && (
+        {events && events.length > 0 && (
           <section id="events" className="site-section" style={s.section}>
             <h2 style={{ ...s.sectionTitle, marginBottom: '64px' }}>Events</h2>
             <div
@@ -287,7 +332,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
                 gap: '2px',
               }}
             >
-              {showcaseEvents.map((event, i) => {
+              {events.map((event, i) => {
                 const imageUrl = event.coverImage
                   ? urlForImage(event.coverImage)
                       ?.width(800)
@@ -350,7 +395,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
         )}
 
         {/* DESIGN */}
-        {showcaseDesign && showcaseDesign.length > 0 && (
+        {design && design.length > 0 && (
           <section id="design" className="site-section" style={s.section}>
             <h2 style={{ ...s.sectionTitle, marginBottom: '64px' }}>Design</h2>
             <div
@@ -361,7 +406,7 @@ export function HomePage({ page, settings, preview }: HomePageProps) {
                 gap: '2px',
               }}
             >
-              {showcaseDesign.map((item, i) => {
+              {design.map((item, i) => {
                 const imageUrl = item.coverImage
                   ? urlForImage(item.coverImage)
                       ?.width(800)

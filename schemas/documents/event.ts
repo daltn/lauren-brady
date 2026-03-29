@@ -14,6 +14,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'order',
+      title: 'Display Order',
+      description: 'Lower numbers appear first in the grid. Leave blank to sort by date.',
+      type: 'number',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

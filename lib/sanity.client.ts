@@ -1,5 +1,8 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  allDesignQuery,
+  allEventsQuery,
+  allProjectsQuery,
   designBySlugQuery,
   designPaths,
   eventBySlugQuery,
@@ -22,6 +25,9 @@ import type {
   PagePayload,
   ProjectPayload,
   SettingsPayload,
+  ShowcaseDesign,
+  ShowcaseEvent,
+  ShowcaseProject,
 } from 'types'
 
 /**
@@ -103,6 +109,30 @@ export async function getDesignBySlug({
   token?: string
 }): Promise<DesignItemPayload | undefined> {
   return await sanityClient(token)?.fetch(designBySlugQuery, { slug })
+}
+
+export async function getAllProjects({
+  token,
+}: {
+  token?: string
+} = {}): Promise<ShowcaseProject[]> {
+  return (await sanityClient(token)?.fetch(allProjectsQuery)) ?? []
+}
+
+export async function getAllEvents({
+  token,
+}: {
+  token?: string
+} = {}): Promise<ShowcaseEvent[]> {
+  return (await sanityClient(token)?.fetch(allEventsQuery)) ?? []
+}
+
+export async function getAllDesign({
+  token,
+}: {
+  token?: string
+} = {}): Promise<ShowcaseDesign[]> {
+  return (await sanityClient(token)?.fetch(allDesignQuery)) ?? []
 }
 
 export async function getProjectPaths(): Promise<string[]> {

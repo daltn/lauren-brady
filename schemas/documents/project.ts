@@ -17,6 +17,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'order',
+      title: 'Display Order',
+      description: 'Lower numbers appear first in the grid. Leave blank to sort by date.',
+      type: 'number',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -66,6 +72,19 @@ export default defineType({
         hotspot: true,
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Branded', value: 'branded' },
+          { title: 'Film & TV', value: 'film-tv' },
+          { title: 'Radio', value: 'radio' },
+        ],
+        layout: 'radio',
+      },
     }),
     defineField({
       name: 'client',

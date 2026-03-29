@@ -21,7 +21,7 @@ export function ProjectPage({
   navLinks,
   preview,
 }: ProjectPageProps) {
-  const { client, artist, description, tags, title, video } = project || {}
+  const { client, description, tags, title, video } = project || {}
 
   return (
     <>
@@ -59,12 +59,6 @@ export function ProjectPage({
               <span style={{ fontSize: '13px', color: 'var(--site-muted)' }}>
                 <strong style={{ color: 'var(--site-ink)', fontWeight: 500 }}>Client: </strong>
                 {client}
-              </span>
-            )}
-            {artist && (
-              <span style={{ fontSize: '13px', color: 'var(--site-muted)' }}>
-                <strong style={{ color: 'var(--site-ink)', fontWeight: 500 }}>Artist: </strong>
-                {artist}
               </span>
             )}
           </div>

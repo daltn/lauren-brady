@@ -99,42 +99,6 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'showcaseProjects',
-      title: 'Media — Selected Work',
-      description: 'Projects shown in the Media grid.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'project' }],
-        }),
-      ],
-    }),
-    defineField({
-      name: 'showcaseEvents',
-      title: 'Events — Featured',
-      description: 'Events shown in the Events grid on the homepage.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'event' }],
-        }),
-      ],
-    }),
-    defineField({
-      name: 'showcaseDesign',
-      title: 'Design — Featured',
-      description: 'Design items shown in the Design grid on the homepage.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'design' }],
-        }),
-      ],
-    }),
-    defineField({
       name: 'approachBlocks',
       title: 'Production Approach',
       description: 'The approach blocks shown in the Production Approach section.',
