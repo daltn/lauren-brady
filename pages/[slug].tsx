@@ -104,7 +104,7 @@ export const getStaticPaths = async () => {
   const paths = await getPagePaths()
 
   return {
-    paths: paths?.map((slug) => resolveHref('page', slug)) || [],
+    paths: paths?.filter((slug) => slug && !slug.startsWith('#') && !slug.startsWith('/')).map((slug) => resolveHref('page', slug)).filter(Boolean) || [],
     fallback: false,
   }
 }

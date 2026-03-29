@@ -1,5 +1,13 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  allDesignQuery,
+  allEventsQuery,
+  allProjectsQuery,
+  designBySlugQuery,
+  designPaths,
+  eventBySlugQuery,
+  eventPaths,
+  homeNavLinksQuery,
   homePageQuery,
   homePageTitleQuery,
   pagePaths,
@@ -10,10 +18,16 @@ import {
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
 import type {
+  DesignItemPayload,
+  EventItemPayload,
   HomePagePayload,
+  NavLink,
   PagePayload,
   ProjectPayload,
   SettingsPayload,
+  ShowcaseDesign,
+  ShowcaseEvent,
+  ShowcaseProject,
 } from 'types'
 
 /**
@@ -39,6 +53,14 @@ export async function getHomePageTitle({
   token?: string
 }): Promise<string | undefined> {
   return await sanityClient(token)?.fetch(homePageTitleQuery)
+}
+
+export async function getHomeNavLinks({
+  token,
+}: {
+  token?: string
+}): Promise<NavLink[] | undefined> {
+  return await sanityClient(token)?.fetch(homeNavLinksQuery)
 }
 
 export async function getPageBySlug({
@@ -69,8 +91,60 @@ export async function getSettings({
   return await sanityClient(token)?.fetch(settingsQuery)
 }
 
+export async function getEventBySlug({
+  slug,
+  token,
+}: {
+  slug: string
+  token?: string
+}): Promise<EventItemPayload | undefined> {
+  return await sanityClient(token)?.fetch(eventBySlugQuery, { slug })
+}
+
+export async function getDesignBySlug({
+  slug,
+  token,
+}: {
+  slug: string
+  token?: string
+}): Promise<DesignItemPayload | undefined> {
+  return await sanityClient(token)?.fetch(designBySlugQuery, { slug })
+}
+
+export async function getAllProjects({
+  token,
+}: {
+  token?: string
+} = {}): Promise<ShowcaseProject[]> {
+  return (await sanityClient(token)?.fetch(allProjectsQuery)) ?? []
+}
+
+export async function getAllEvents({
+  token,
+}: {
+  token?: string
+} = {}): Promise<ShowcaseEvent[]> {
+  return (await sanityClient(token)?.fetch(allEventsQuery)) ?? []
+}
+
+export async function getAllDesign({
+  token,
+}: {
+  token?: string
+} = {}): Promise<ShowcaseDesign[]> {
+  return (await sanityClient(token)?.fetch(allDesignQuery)) ?? []
+}
+
 export async function getProjectPaths(): Promise<string[]> {
   return await sanityClient()?.fetch(projectPaths)
+}
+
+export async function getEventPaths(): Promise<string[]> {
+  return await sanityClient()?.fetch(eventPaths)
+}
+
+export async function getDesignPaths(): Promise<string[]> {
+  return await sanityClient()?.fetch(designPaths)
 }
 
 export async function getPagePaths(): Promise<string[]> {

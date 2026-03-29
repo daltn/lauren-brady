@@ -2,6 +2,7 @@ import { PreviewSuspense } from '@sanity/preview-kit'
 import { ProjectPage } from 'components/pages/project/ProjectPage'
 import { PreviewWrapper } from 'components/preview/PreviewWrapper'
 import {
+  getHomeNavLinks,
   getHomePageTitle,
   getProjectBySlug,
   getProjectPaths,
@@ -10,7 +11,7 @@ import {
 import { resolveHref } from 'lib/sanity.links'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
-import { ProjectPayload, SettingsPayload } from 'types'
+import { NavLink, ProjectPayload, SettingsPayload } from 'types'
 
 const ProjectPreview = lazy(
   () => import('components/pages/project/ProjectPreview')
@@ -20,6 +21,7 @@ interface PageProps {
   project?: ProjectPayload
   settings?: SettingsPayload
   homePageTitle?: string
+  navLinks?: NavLink[]
   preview: boolean
   token: string | null
 }
@@ -33,7 +35,7 @@ interface PreviewData {
 }
 
 export default function ProjectSlugRoute(props: PageProps) {
-  const { homePageTitle, settings, project, preview, token } = props
+  const { homePageTitle, navLinks, settings, project, preview, token } = props
 
   if (preview) {
     return (
@@ -44,6 +46,7 @@ export default function ProjectSlugRoute(props: PageProps) {
               homePageTitle={homePageTitle}
               project={project}
               settings={settings}
+              navLinks={navLinks}
               preview={preview}
             />
           </PreviewWrapper>
@@ -64,6 +67,7 @@ export default function ProjectSlugRoute(props: PageProps) {
       homePageTitle={homePageTitle}
       project={project}
       settings={settings}
+      navLinks={navLinks}
       preview={preview}
     />
   )
@@ -78,11 +82,18 @@ export const getStaticProps: GetStaticProps<
 
   const token = previewData.token
 
-  const [settings, project, homePageTitle] = await Promise.all([
+  const [settings, project, homePageTitle, rawNavLinks] = await Promise.all([
     getSettings({ token }),
     getProjectBySlug({ token, slug: params.slug }),
     getHomePageTitle({ token }),
+    getHomeNavLinks({ token }),
   ])
+
+  // Prefix anchor-only hrefs with / so they navigate to the home page section
+  const navLinks = rawNavLinks?.map((l) => ({
+    ...l,
+    href: l.href.startsWith('#') ? `/${l.href}` : l.href,
+  }))
 
   if (!project) {
     return {
@@ -95,6 +106,7 @@ export const getStaticProps: GetStaticProps<
       project,
       settings,
       homePageTitle,
+      navLinks: navLinks ?? null,
       preview,
       token: previewData.token ?? null,
     },
