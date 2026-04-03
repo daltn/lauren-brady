@@ -17,6 +17,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'url',
+      title: 'External Link (optional)',
+      description: 'If set, the grid card links to this URL instead of the internal page.',
+      type: 'url',
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       description: 'Lower numbers appear first in the grid. Leave blank to sort by date.',

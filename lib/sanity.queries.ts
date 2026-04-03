@@ -78,6 +78,7 @@ export const allProjectsQuery = groq`
     "slug": slug.current,
     tags,
     title,
+    url,
   }
 `
 
@@ -88,6 +89,7 @@ export const allEventsQuery = groq`
     overview,
     "slug": slug.current,
     title,
+    url,
   }
 `
 
@@ -98,6 +100,7 @@ export const allDesignQuery = groq`
     overview,
     "slug": slug.current,
     title,
+    url,
   }
 `
 

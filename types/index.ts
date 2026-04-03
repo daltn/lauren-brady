@@ -22,6 +22,7 @@ export interface ShowcaseProject {
   slug?: string
   tags?: string[]
   title?: string
+  url?: string
 }
 
 export interface ExperienceEntry {
@@ -51,6 +52,7 @@ export interface ShowcaseEvent {
   overview?: PortableTextBlock[]
   slug?: string
   title?: string
+  url?: string
 }
 
 export interface ShowcaseDesign {
@@ -59,6 +61,7 @@ export interface ShowcaseDesign {
   overview?: PortableTextBlock[]
   slug?: string
   title?: string
+  url?: string
 }
 
 export interface GalleryImage {

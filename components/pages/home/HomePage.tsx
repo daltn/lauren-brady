@@ -249,67 +249,75 @@ export function HomePage({
                             .url()
                         : null
                       const bgColor = fallbackColors[i % fallbackColors.length]
-                      const href = `/projects/${project.slug}`
-                      return (
-                        <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                      const href = project.url ?? `/projects/${project.slug}`
+                      const isExternal = !!project.url
+                      const cardInner = (
+                        <div
+                          className="animate-on-scroll work-card-container"
+                          style={{
+                            position: 'relative',
+                            aspectRatio: '4/3',
+                            overflow: 'hidden',
+                            cursor: 'pointer',
+                          }}
+                        >
                           <div
-                            className="animate-on-scroll work-card-container"
                             style={{
-                              position: 'relative',
-                              aspectRatio: '4/3',
-                              overflow: 'hidden',
-                              cursor: 'pointer',
+                              width: '100%',
+                              height: '100%',
+                              background: imageUrl
+                                ? `url(${imageUrl}) center/cover no-repeat`
+                                : bgColor,
+                              transition: 'transform 0.5s ease',
+                            }}
+                          />
+                          <div
+                            className="work-card-overlay"
+                            style={{
+                              position: 'absolute',
+                              inset: 0,
+                              background: 'var(--site-ink)',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'flex-end',
+                              padding: '28px',
                             }}
                           >
-                            <div
+                            <p
                               style={{
-                                width: '100%',
-                                height: '100%',
-                                background: imageUrl
-                                  ? `url(${imageUrl}) center/cover no-repeat`
-                                  : bgColor,
-                                transition: 'transform 0.5s ease',
-                              }}
-                            />
-                            <div
-                              className="work-card-overlay"
-                              style={{
-                                position: 'absolute',
-                                inset: 0,
-                                background: 'var(--site-ink)',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'flex-end',
-                                padding: '28px',
+                                fontFamily: 'var(--font-serif)',
+                                fontSize: '22px',
+                                fontWeight: 400,
+                                color: 'var(--site-warm)',
+                                marginBottom: '4px',
                               }}
                             >
+                              {project.title}
+                            </p>
+                            {(project.client || project.role) && (
                               <p
                                 style={{
-                                  fontFamily: 'var(--font-serif)',
-                                  fontSize: '22px',
-                                  fontWeight: 400,
-                                  color: 'var(--site-warm)',
-                                  marginBottom: '4px',
+                                  fontSize: '12px',
+                                  color: 'rgba(255,255,255,0.6)',
+                                  letterSpacing: '0.06em',
+                                  textTransform: 'uppercase',
                                 }}
                               >
-                                {project.title}
+                                {[project.client, project.role]
+                                  .filter(Boolean)
+                                  .join(' · ')}
                               </p>
-                              {(project.client || project.role) && (
-                                <p
-                                  style={{
-                                    fontSize: '12px',
-                                    color: 'rgba(255,255,255,0.6)',
-                                    letterSpacing: '0.06em',
-                                    textTransform: 'uppercase',
-                                  }}
-                                >
-                                  {[project.client, project.role]
-                                    .filter(Boolean)
-                                    .join(' · ')}
-                                </p>
-                              )}
-                            </div>
+                            )}
                           </div>
+                        </div>
+                      )
+                      return isExternal ? (
+                        <a key={i} href={href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                          {cardInner}
+                        </a>
+                      ) : (
+                        <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                          {cardInner}
                         </Link>
                       )
                     })}
@@ -341,52 +349,60 @@ export function HomePage({
                       .url()
                   : null
                 const bgColor = fallbackColors[i % fallbackColors.length]
-                const href = `/event/${event.slug}`
-                return (
-                  <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                const href = event.url ?? `/event/${event.slug}`
+                const isExternal = !!event.url
+                const cardInner = (
+                  <div
+                    className="animate-on-scroll work-card-container"
+                    style={{
+                      position: 'relative',
+                      aspectRatio: '1/1',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                    }}
+                  >
                     <div
-                      className="animate-on-scroll work-card-container"
                       style={{
-                        position: 'relative',
-                        aspectRatio: '1/1',
-                        overflow: 'hidden',
-                        cursor: 'pointer',
+                        width: '100%',
+                        height: '100%',
+                        background: imageUrl
+                          ? `url(${imageUrl}) center/cover no-repeat`
+                          : bgColor,
+                        transition: 'transform 0.5s ease',
+                      }}
+                    />
+                    <div
+                      className="work-card-overlay"
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'var(--site-ink)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-end',
+                        padding: '28px',
                       }}
                     >
-                      <div
+                      <p
                         style={{
-                          width: '100%',
-                          height: '100%',
-                          background: imageUrl
-                            ? `url(${imageUrl}) center/cover no-repeat`
-                            : bgColor,
-                          transition: 'transform 0.5s ease',
-                        }}
-                      />
-                      <div
-                        className="work-card-overlay"
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'var(--site-ink)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'flex-end',
-                          padding: '28px',
+                          fontFamily: 'var(--font-serif)',
+                          fontSize: '22px',
+                          fontWeight: 400,
+                          color: 'var(--site-warm)',
                         }}
                       >
-                        <p
-                          style={{
-                            fontFamily: 'var(--font-serif)',
-                            fontSize: '22px',
-                            fontWeight: 400,
-                            color: 'var(--site-warm)',
-                          }}
-                        >
-                          {event.title}
-                        </p>
-                      </div>
+                        {event.title}
+                      </p>
                     </div>
+                  </div>
+                )
+                return isExternal ? (
+                  <a key={i} href={href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    {cardInner}
+                  </a>
+                ) : (
+                  <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                    {cardInner}
                   </Link>
                 )
               })}
@@ -415,52 +431,60 @@ export function HomePage({
                       .url()
                   : null
                 const bgColor = fallbackColors[i % fallbackColors.length]
-                const href = `/design/${item.slug}`
-                return (
-                  <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                const href = item.url ?? `/design/${item.slug}`
+                const isExternal = !!item.url
+                const cardInner = (
+                  <div
+                    className="animate-on-scroll work-card-container"
+                    style={{
+                      position: 'relative',
+                      aspectRatio: '1/1',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                    }}
+                  >
                     <div
-                      className="animate-on-scroll work-card-container"
                       style={{
-                        position: 'relative',
-                        aspectRatio: '1/1',
-                        overflow: 'hidden',
-                        cursor: 'pointer',
+                        width: '100%',
+                        height: '100%',
+                        background: imageUrl
+                          ? `url(${imageUrl}) center/cover no-repeat`
+                          : bgColor,
+                        transition: 'transform 0.5s ease',
+                      }}
+                    />
+                    <div
+                      className="work-card-overlay"
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'var(--site-ink)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-end',
+                        padding: '28px',
                       }}
                     >
-                      <div
+                      <p
                         style={{
-                          width: '100%',
-                          height: '100%',
-                          background: imageUrl
-                            ? `url(${imageUrl}) center/cover no-repeat`
-                            : bgColor,
-                          transition: 'transform 0.5s ease',
-                        }}
-                      />
-                      <div
-                        className="work-card-overlay"
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'var(--site-ink)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'flex-end',
-                          padding: '28px',
+                          fontFamily: 'var(--font-serif)',
+                          fontSize: '22px',
+                          fontWeight: 400,
+                          color: 'var(--site-warm)',
                         }}
                       >
-                        <p
-                          style={{
-                            fontFamily: 'var(--font-serif)',
-                            fontSize: '22px',
-                            fontWeight: 400,
-                            color: 'var(--site-warm)',
-                          }}
-                        >
-                          {item.title}
-                        </p>
-                      </div>
+                        {item.title}
+                      </p>
                     </div>
+                  </div>
+                )
+                return isExternal ? (
+                  <a key={i} href={href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    {cardInner}
+                  </a>
+                ) : (
+                  <Link key={i} href={href} style={{ textDecoration: 'none' }}>
+                    {cardInner}
                   </Link>
                 )
               })}
