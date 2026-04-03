@@ -87,6 +87,23 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'images',
+      title: 'Gallery Images',
+      description: 'Images displayed in the multi-column grid below the body.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'image',
+          icon: ImageIcon,
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+            defineField({ name: 'caption', type: 'string', title: 'Caption' }),
+          ],
+        }),
+      ],
+    }),
   ],
   preview: {
     select: { title: 'title', media: 'coverImage' },

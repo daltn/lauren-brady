@@ -103,6 +103,7 @@ export interface DesignItemPayload {
   overview?: PortableTextBlock[]
   coverImage?: Image
   body?: PortableTextBlock[]
+  images?: GalleryImage[]
 }
 
 export interface PagePayload {

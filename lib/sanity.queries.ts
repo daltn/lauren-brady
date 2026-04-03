@@ -133,6 +133,12 @@ export const designBySlugQuery = groq`
     overview,
     coverImage,
     body,
+    images[]{
+      _key,
+      asset,
+      alt,
+      caption,
+    },
   }
 `
 
