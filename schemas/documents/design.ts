@@ -32,21 +32,6 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'overview',
-      title: 'SEO Description',
-      description: 'Used for search engine results. Not shown on page.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          lists: [],
-          marks: { decorators: [{ title: 'Italic', value: 'em' }] },
-          styles: [],
-          type: 'block',
-        }),
-      ],
-      validation: (rule) => rule.max(155),
-    }),
-    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       description: 'Shown in the design grid on the homepage.',

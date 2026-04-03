@@ -46,7 +46,7 @@ export function Navbar({
           mixBlendMode: 'multiply',
         }}
       >
-        <a
+        <Link
           href="/"
           style={{
             fontFamily: 'var(--font-sans)',
@@ -59,7 +59,7 @@ export function Navbar({
           }}
         >
           {siteName}
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <ul
@@ -96,12 +96,26 @@ export function Navbar({
           }}
         >
           {open ? (
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <line x1="3" y1="3" x2="17" y2="17" />
               <line x1="17" y1="3" x2="3" y2="17" />
             </svg>
           ) : (
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <line x1="3" y1="6" x2="17" y2="6" />
               <line x1="3" y1="10" x2="17" y2="10" />
               <line x1="3" y1="14" x2="17" y2="14" />

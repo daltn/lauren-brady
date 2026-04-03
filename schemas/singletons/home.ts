@@ -16,16 +16,14 @@ export default defineType({
     }),
     defineField({
       name: 'overview',
-      description: 'Used for search engine results (meta description). Not shown on page.',
+      description: 'Used for the meta description and structured data (JSON-LD). Not shown on page.',
       title: 'SEO Description',
       type: 'array',
       of: [
         defineArrayMember({
           lists: [],
           marks: {
-            annotations: [
-              { name: 'link', type: 'object', title: 'Link', fields: [{ name: 'href', type: 'url', title: 'Url' }] },
-            ],
+            annotations: [],
             decorators: [
               { title: 'Italic', value: 'em' },
               { title: 'Strong', value: 'strong' },
@@ -35,7 +33,7 @@ export default defineType({
           type: 'block',
         }),
       ],
-      validation: (rule) => rule.max(155).required(),
+      validation: (rule) => rule.max(155),
     }),
     defineField({
       name: 'eyebrow',

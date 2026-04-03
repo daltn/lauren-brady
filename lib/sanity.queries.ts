@@ -42,7 +42,6 @@ export const pagesBySlugQuery = groq`
       coverImage,
       client,
       role,
-      overview,
       "slug": slug.current,
       tags,
       title,
@@ -60,7 +59,6 @@ export const projectBySlugQuery = groq`
     coverImage,
     description,
     video,
-    overview,
     "slug": slug.current,
     tags,
     title,
@@ -74,7 +72,6 @@ export const allProjectsQuery = groq`
     coverImage,
     client,
     role,
-    overview,
     "slug": slug.current,
     tags,
     title,
@@ -86,7 +83,6 @@ export const allEventsQuery = groq`
   *[_type == "event"] | order(order asc, _createdAt desc) {
     _type,
     coverImage,
-    overview,
     "slug": slug.current,
     title,
     url,
@@ -97,7 +93,6 @@ export const allDesignQuery = groq`
   *[_type == "design"] | order(order asc, _createdAt desc) {
     _type,
     coverImage,
-    overview,
     "slug": slug.current,
     title,
     url,
@@ -113,7 +108,6 @@ export const eventBySlugQuery = groq`
     _id,
     title,
     "slug": slug.current,
-    overview,
     coverImage,
     description,
     images[]{
@@ -130,7 +124,6 @@ export const designBySlugQuery = groq`
     _id,
     title,
     "slug": slug.current,
-    overview,
     coverImage,
     body,
     images[]{

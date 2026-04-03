@@ -2,23 +2,42 @@ import { CustomPortableText } from 'components/shared/CustomPortableText'
 import ScrollUp from 'components/shared/ScrollUp'
 import Head from 'next/head'
 import { urlForImage } from 'lib/sanity.image'
+import { SiteMeta } from 'components/global/SiteMeta'
+import { JsonLd, designSchema } from 'components/global/JsonLd'
 import type { DesignItemPayload, NavLink, SettingsPayload } from 'types'
 import Layout from '../../shared/Layout'
 
 export interface DesignItemPageProps {
   design: DesignItemPayload | undefined
   settings: SettingsPayload | undefined
+  homePageTitle?: string
   navLinks?: NavLink[]
   preview?: boolean
 }
 
-export function DesignItemPage({ design, settings, navLinks, preview }: DesignItemPageProps) {
-  const { title, body, images } = design || {}
+export function DesignItemPage({ design, settings, homePageTitle, navLinks, preview }: DesignItemPageProps) {
+  const { title, body, images, coverImage, slug } = design || {}
+
+  const imageUrl = coverImage
+    ? urlForImage(coverImage)?.width(1200).height(627).fit('crop').url() ?? null
+    : null
 
   return (
     <>
       <Head>
-        <title>{title ? `${title} — Lauren Brady` : 'Lauren Brady'}</title>
+        <SiteMeta
+          baseTitle={homePageTitle}
+          title={title}
+          image={coverImage}
+        />
+        <JsonLd
+          schema={designSchema({
+            title,
+            slug,
+            imageUrl,
+            creatorName: homePageTitle,
+          })}
+        />
       </Head>
 
       <Layout settings={settings} navLinks={navLinks} preview={preview}>

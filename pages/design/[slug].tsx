@@ -3,6 +3,7 @@ import {
   getDesignBySlug,
   getDesignPaths,
   getHomeNavLinks,
+  getHomePageTitle,
   getSettings,
 } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
@@ -11,6 +12,7 @@ import { DesignItemPayload, NavLink, SettingsPayload } from 'types'
 interface PageProps {
   design?: DesignItemPayload
   settings?: SettingsPayload
+  homePageTitle?: string
   navLinks?: NavLink[]
   preview: boolean
   token: string | null
@@ -25,11 +27,12 @@ interface PreviewData {
 }
 
 export default function DesignSlugRoute(props: PageProps) {
-  const { design, settings, navLinks, preview } = props
+  const { design, settings, homePageTitle, navLinks, preview } = props
   return (
     <DesignItemPage
       design={design}
       settings={settings}
+      homePageTitle={homePageTitle}
       navLinks={navLinks}
       preview={preview}
     />
@@ -40,9 +43,10 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
   const { preview = false, previewData = {}, params = {} } = ctx
   const token = previewData.token
 
-  const [settings, design, rawNavLinks] = await Promise.all([
+  const [settings, design, homePageTitle, rawNavLinks] = await Promise.all([
     getSettings({ token }),
     getDesignBySlug({ token, slug: params.slug }),
+    getHomePageTitle({ token }),
     getHomeNavLinks({ token }),
   ])
 
@@ -59,6 +63,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
     props: {
       design,
       settings,
+      homePageTitle: homePageTitle ?? null,
       navLinks: navLinks ?? null,
       preview,
       token: previewData.token ?? null,

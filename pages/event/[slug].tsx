@@ -3,6 +3,7 @@ import {
   getEventBySlug,
   getEventPaths,
   getHomeNavLinks,
+  getHomePageTitle,
   getSettings,
 } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
@@ -11,6 +12,7 @@ import { EventItemPayload, NavLink, SettingsPayload } from 'types'
 interface PageProps {
   event?: EventItemPayload
   settings?: SettingsPayload
+  homePageTitle?: string
   navLinks?: NavLink[]
   preview: boolean
   token: string | null
@@ -25,11 +27,12 @@ interface PreviewData {
 }
 
 export default function EventSlugRoute(props: PageProps) {
-  const { event, settings, navLinks, preview } = props
+  const { event, settings, homePageTitle, navLinks, preview } = props
   return (
     <EventItemPage
       event={event}
       settings={settings}
+      homePageTitle={homePageTitle}
       navLinks={navLinks}
       preview={preview}
     />
@@ -40,9 +43,10 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
   const { preview = false, previewData = {}, params = {} } = ctx
   const token = previewData.token
 
-  const [settings, event, rawNavLinks] = await Promise.all([
+  const [settings, event, homePageTitle, rawNavLinks] = await Promise.all([
     getSettings({ token }),
     getEventBySlug({ token, slug: params.slug }),
+    getHomePageTitle({ token }),
     getHomeNavLinks({ token }),
   ])
 
@@ -59,6 +63,7 @@ export const getStaticProps: GetStaticProps<PageProps, Query, PreviewData> = asy
     props: {
       event,
       settings,
+      homePageTitle: homePageTitle ?? null,
       navLinks: navLinks ?? null,
       preview,
       token: previewData.token ?? null,

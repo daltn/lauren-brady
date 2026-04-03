@@ -18,7 +18,6 @@ export interface ShowcaseProject {
   coverImage?: Image
   client?: string
   role?: string
-  overview?: PortableTextBlock[]
   slug?: string
   tags?: string[]
   title?: string
@@ -49,7 +48,6 @@ export interface ClientLogo {
 export interface ShowcaseEvent {
   _type: string
   coverImage?: Image
-  overview?: PortableTextBlock[]
   slug?: string
   title?: string
   url?: string
@@ -58,7 +56,6 @@ export interface ShowcaseEvent {
 export interface ShowcaseDesign {
   _type: string
   coverImage?: Image
-  overview?: PortableTextBlock[]
   slug?: string
   title?: string
   url?: string
@@ -90,7 +87,6 @@ export interface EventItemPayload {
   _id?: string
   title?: string
   slug: string
-  overview?: PortableTextBlock[]
   coverImage?: Image
   description?: PortableTextBlock[]
   images?: GalleryImage[]
@@ -100,7 +96,6 @@ export interface DesignItemPayload {
   _id?: string
   title?: string
   slug: string
-  overview?: PortableTextBlock[]
   coverImage?: Image
   body?: PortableTextBlock[]
   images?: GalleryImage[]
@@ -123,7 +118,6 @@ export interface ProjectPayload {
   coverImage?: Image
   description?: PortableTextBlock[]
   video?: PortableTextBlock[]
-  overview?: PortableTextBlock[]
   slug: string
   tags?: string[]
   title?: string
