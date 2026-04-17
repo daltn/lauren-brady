@@ -244,7 +244,7 @@ export function HomePage({
                       const imageUrl = project.coverImage
                         ? urlForImage(project.coverImage)
                             ?.width(800)
-                            .height(600)
+                            .height(key === 'radio' ? 800 : 600)
                             .fit('crop')
                             .url()
                         : null
@@ -256,7 +256,7 @@ export function HomePage({
                           className="animate-on-scroll work-card-container"
                           style={{
                             position: 'relative',
-                            aspectRatio: '4/3',
+                            aspectRatio: key === 'radio' ? '1/1' : '4/3',
                             overflow: 'hidden',
                             cursor: 'pointer',
                           }}
