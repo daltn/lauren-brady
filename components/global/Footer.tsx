@@ -1,6 +1,6 @@
 const links = [
   { label: 'Email', href: 'mailto:lauren@lauren-brady.com' },
-  { label: 'LinkedIn', href: '#' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/lauren-rachel-brady/' },
 ]
 
 export function Footer() {
